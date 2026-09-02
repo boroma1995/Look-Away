@@ -1,0 +1,6 @@
+{
+  "name": "Look Away",
+  "description": "Stay Strong. Stay Focused. Build Your Legacy. A luxury gold & dark discipline tracker for logging visual engagements, triggers, and reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
