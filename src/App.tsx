@@ -483,7 +483,7 @@ export default function App() {
           <CommentsScreen
             comments={draft.comments}
             onChangeComments={(t) => setDraft((p) => ({ ...p, comments: t }))}
-            onNext={() => setCurrentStep('triggers')}
+            onNext={() => setCurrentStep('review')}
             onBack={() => setCurrentStep('hair')}
           />
         );
