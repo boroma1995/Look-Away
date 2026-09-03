@@ -5,15 +5,13 @@ import {
   EngagementRecord,
   NewEngagementDraft,
   FlowStep,
-  ViewMode,
   ScoreLevel,
   ReportRecord,
   AdminUserRecord,
 } from './types';
 import { INITIAL_ENGAGEMENTS, INITIAL_USER, SCORE_OPTIONS } from './data/constants';
-import { Header, BottomNavBar } from './components/Navigation';
+import { BottomNavBar } from './components/Navigation';
 import { PhoneSimulator } from './components/PhoneSimulator';
-import { ShowcaseView } from './components/ShowcaseView';
 import { AuthModal } from './components/AuthModal';
 import { SplashScreen } from './components/Screens/SplashScreen';
 import { RegisterScreen } from './components/Screens/RegisterScreen';
@@ -89,9 +87,6 @@ export default function App() {
   });
 
   const [currentStep, setCurrentStep] = useState<FlowStep>('home');
-  const [viewMode, setViewMode] = useState<ViewMode>(() =>
-    Capacitor.isNativePlatform() ? 'mobile' : 'web'
-  );
   const [draft, setDraft] = useState<NewEngagementDraft>(EMPTY_DRAFT);
   const [lastLoggedEngagement, setLastLoggedEngagement] = useState<EngagementRecord | null>(
     engagements[0] || null
@@ -663,113 +658,14 @@ export default function App() {
         onSignUp={handleSignUp}
       />
 
-      {/* App Container: Reverted back to clean, fully interactive state */}
+      {/* Mobile app container */}
       <div className="relative z-10 w-full max-w-[1240px] mx-auto px-2.5 sm:px-6 py-2.5 sm:py-5 transition-all duration-300">
-        {/* Header */}
-        {!Capacitor.isNativePlatform() && (
-          <Header
-            user={user}
-            currentStep={currentStep}
-            viewMode={viewMode}
-            onSetViewMode={setViewMode}
-            onNavigate={(step) => setCurrentStep(step)}
-            streakDays={7}
-            isAuthenticated={isAuthenticated}
-            onOpenAuthModal={() => {
-              setAuthModalInitialView('login');
-              setIsAuthModalOpen(true);
-            }}
-            onLogout={handleLogout}
-            onOpenAdmin={() => setCurrentStep('admin')}
-          />
-        )}
-
-        {/* View Mode Switching: Mobile Device Simulator / 16-Screens Matrix / Web Desktop Layout */}
-        {viewMode === 'mobile' ? (
-          Capacitor.isNativePlatform() ? (
-            <main className="native-app-content w-full min-h-screen">
-              {renderScreen()}
-            </main>
-          ) : (
-            <PhoneSimulator currentStep={currentStep} onSetStep={setCurrentStep}>
-              {renderScreen()}
-            </PhoneSimulator>
-          )
-        ) : viewMode === 'showcase' ? (
-          <ShowcaseView
-            user={user}
-            engagements={engagements}
-            draft={draft}
-            startDate={startDate}
-            endDate={endDate}
-            onSetDates={(s, e) => {
-              setStartDate(s);
-              setEndDate(e);
-            }}
-            onOpenScreenInSimulator={(step) => {
-              setCurrentStep(step);
-              setViewMode('mobile');
-            }}
-            onDeleteEngagement={handleDeleteEngagement}
-            onSaveProfile={(p) => setUser(p)}
-          />
+        {Capacitor.isNativePlatform() ? (
+          <main className="native-app-content w-full min-h-screen">{renderScreen()}</main>
         ) : (
-          /* Desktop View: Responsive layout styled for desktop screens */
-          <main className="w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Left Column: Focused Interactive Screen Card */}
-              <div className="lg:col-span-5 flex justify-center">
-                <div className="w-full max-w-[420px] bg-[#030814] rounded-3xl p-4 sm:p-6 border border-[#765b24]/70 shadow-[0_20px_50px_rgba(0,0,0,0.85)] relative overflow-hidden">
-                  {/* Subtle 5% watermark inside card */}
-                  <div
-                    className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center select-none"
-                    aria-hidden="true"
-                  >
-                    <img
-                      src="/Logo+lookaway.png"
-                      alt=""
-                      className="w-[70%] object-contain pointer-events-none"
-                      style={{ opacity: 0.05 }}
-                    />
-                  </div>
-                  <div className="relative z-10">{renderScreen()}</div>
-                </div>
-              </div>
-
-              {/* Right Column: Desktop Analytics, Reports & Quick Flow Controls */}
-              <div className="lg:col-span-7 space-y-6">
-                <div className="bg-[#030814] border border-[#765b24]/60 rounded-3xl p-5 sm:p-6 shadow-xl">
-                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#765b24]/40">
-                    <h3 className="font-serif-gold text-sm sm:text-base font-bold tracking-widest text-[#f1ca63] uppercase m-0">
-                      DESKTOP ACCOUNTABILITY SUITE
-                    </h3>
-                    <button
-                      onClick={() => setViewMode('showcase')}
-                      className="text-xs font-bold text-[#f1ca63] hover:underline cursor-pointer"
-                    >
-                      View All 16 Screens →
-                    </button>
-                  </div>
-                  <p className="text-xs text-[#b9b7ad] leading-relaxed mb-4">
-                    Track, log, and review visual engagements seamlessly. Switch between the 16 mobile screens or use this unified desktop dashboard for analysis and export.
-                  </p>
-
-                  <ReportsDashboard
-                    user={user}
-                    engagements={engagements}
-                    startDate={startDate}
-                    endDate={endDate}
-                    onSetDates={(s, e) => {
-                      setStartDate(s);
-                      setEndDate(e);
-                    }}
-                    onSelectNewEngagement={handleStartLogging}
-                    onDeleteEngagement={handleDeleteEngagement}
-                  />
-                </div>
-              </div>
-            </div>
-          </main>
+          <PhoneSimulator currentStep={currentStep} onSetStep={setCurrentStep}>
+            {renderScreen()}
+          </PhoneSimulator>
         )}
 
         {/* Footer Note */}
