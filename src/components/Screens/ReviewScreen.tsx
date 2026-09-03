@@ -11,6 +11,7 @@ import {
   MessageSquare,
   Edit3,
   ShieldCheck,
+  AlertCircle,
 } from 'lucide-react';
 
 interface ReviewScreenProps {
@@ -66,9 +67,16 @@ export function ReviewScreen({ draft, onEdit, onSubmit }: ReviewScreenProps) {
     { label: 'Location', value: locationsText, icon: MapPin },
     { label: 'Attire', value: attireText, icon: Sparkles },
     { label: 'Eyes Went To', value: eyesText, icon: Eye },
-    { label: 'Her Build', value: buildText, icon: User },
+    { label: 'Her Body Type', value: buildText, icon: User },
     { label: 'Hair Color', value: hairText, icon: Palette },
     { label: 'Comments', value: commentsText, icon: MessageSquare },
+    {
+      label: 'Triggers',
+      value: draft.triggers.length
+        ? draft.triggers.map((entry) => entry.comment ? `${entry.trigger}: ${entry.comment}` : entry.trigger).join('; ')
+        : 'None recorded',
+      icon: AlertCircle,
+    },
   ];
 
   return (

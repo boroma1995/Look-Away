@@ -1,18 +1,38 @@
 import { EngagementRecord, ScoreOption, UserProfile } from '../types';
 
+export const TRIGGER_OPTIONS = [
+  'STRESSED',
+  'LONELINESS',
+  'ANGER',
+  'ANXIETY / FEAR',
+  'DEPRESSION / SADNESS',
+  'BOREDOM',
+  'SHAME / GUILT',
+  'REJECTION OR PERCEIVED REJECTION',
+  'RELATIONSHIP CONFLICT',
+  'FATIGUE',
+  'BEING ALONE',
+  'ENVIRONMENTAL CUES',
+  'ALCOHOL OR OTHER SUBSTANCES',
+  'SUCCESS / EXCITEMENT',
+  'SEXUAL AROUSAL',
+  'MEMORIES / TRAUMA REMINDERS',
+  'OPPORTUNITY AND SECRECY',
+] as const;
+
 export const SCORE_OPTIONS: ScoreOption[] = [
   {
     level: 1,
     code: '1 - SEE',
     title: '1 - SEE',
-    description: 'Accidental glance, noticed and looked away immediately',
+    description: 'Saw her, then looked away immediately',
     icon: 'Eye',
   },
   {
     level: 2,
     code: '2 - LOOK',
     title: '2 - LOOK',
-    description: 'Deliberate or second glance, took conscious effort to look away',
+    description: 'A second look that took conscious effort to redirect',
     icon: 'EyeOff',
   },
   {
@@ -69,7 +89,7 @@ export const EYES_OPTIONS = [
   { id: 'breasts', label: 'BREASTS', icon: 'CircleDot' },
   { id: 'butt', label: 'BUTT', icon: 'HeartHandshake' },
   { id: 'legs', label: 'LEGS', icon: 'MoveDown' },
-  { id: 'crotch', label: 'CROTCH', icon: 'Shield' },
+  { id: 'pelvic_region', label: 'PELVIC REGION', icon: 'Shield' },
   { id: 'whole_package', label: 'THE WHOLE PACKAGE', icon: 'Sparkles' },
   { id: 'other', label: 'OTHER', icon: 'Eye' },
 ];
@@ -88,9 +108,10 @@ export const BUILD_OPTIONS = [
 
 export const HAIR_OPTIONS = [
   { id: 'blonde', label: 'BLONDE', color: '#F1CA63', bgClass: 'bg-[#F1CA63]' },
-  { id: 'brown', label: 'BROWN', color: '#8D5B28', bgClass: 'bg-[#8D5B28]' },
+  { id: 'brown_auburn', label: 'BROWN / AUBURN', color: '#8D5B28', bgClass: 'bg-[#8D5B28]' },
   { id: 'black', label: 'BLACK', color: '#181818', bgClass: 'bg-[#181818]' },
   { id: 'red', label: 'RED', color: '#C83226', bgClass: 'bg-[#C83226]' },
+  { id: 'gray_white', label: 'GRAY / WHITE', color: '#D8D8D8', bgClass: 'bg-[#D8D8D8]' },
   { id: 'other', label: 'OTHER', color: '#765B24', bgClass: 'bg-[#765B24]' },
 ];
 
@@ -109,6 +130,7 @@ export const INITIAL_ENGAGEMENTS: EngagementRecord[] = [
     herBuild: ['Curvy', 'Long Legs'],
     hairColor: 'Brown',
     comments: 'She was at the gas station and walking to her car.',
+    triggers: [],
   },
   {
     id: 'eng-2',
@@ -124,6 +146,7 @@ export const INITIAL_ENGAGEMENTS: EngagementRecord[] = [
     herBuild: ['Athletic'],
     hairColor: 'Blonde',
     comments: 'Lingered in the supermarket produce section. Refocused mind.',
+    triggers: [],
   },
   {
     id: 'eng-3',
@@ -139,6 +162,7 @@ export const INITIAL_ENGAGEMENTS: EngagementRecord[] = [
     herBuild: ['Curvy'],
     hairColor: 'Black',
     comments: 'Turned eyes away immediately upon walking into the meeting room.',
+    triggers: [],
   },
   {
     id: 'eng-4',
@@ -154,6 +178,7 @@ export const INITIAL_ENGAGEMENTS: EngagementRecord[] = [
     herBuild: ['Thin', 'Long Legs'],
     hairColor: 'Blonde',
     comments: 'Social media algorithmic feed trap. Promptly closed the application.',
+    triggers: [],
   },
   {
     id: 'eng-5',
@@ -169,6 +194,7 @@ export const INITIAL_ENGAGEMENTS: EngagementRecord[] = [
     herBuild: ['Curvy', 'Big Breasts'],
     hairColor: 'Red',
     comments: 'Unexpected explicit scene during evening television. Turned off display.',
+    triggers: [],
   },
   {
     id: 'eng-6',
@@ -184,6 +210,7 @@ export const INITIAL_ENGAGEMENTS: EngagementRecord[] = [
     herBuild: ['Curvy'],
     hairColor: 'Brown',
     comments: 'Crosswalk pedestrian while stopped at red light. Kept eyes forward.',
+    triggers: [],
   },
 ];
 

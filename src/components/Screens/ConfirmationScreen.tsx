@@ -70,7 +70,7 @@ export function ConfirmationScreen({
             </span>
           </div>
           <p className="text-xs text-[#b9b7ad] italic leading-relaxed m-0">
-            "The first step in breaking unconscious looking habits is total honesty with yourself and tracking every glance."
+            "The first step in breaking unconscious looking habits is total honesty with yourself and tracking every encounter."
           </p>
         </div>
       </div>
@@ -84,7 +84,7 @@ export function ConfirmationScreen({
           className="w-full py-3.5 px-4 rounded-xl font-serif-gold text-xs sm:text-sm font-black tracking-widest uppercase bg-gradient-to-r from-[#d8a838] via-[#eec765] to-[#c9982c] text-[#0a0e14] hover:brightness-110 active:scale-[0.99] transition-all shadow-[0_4px_16px_rgba(216,168,56,0.3)] flex items-center justify-center gap-2 cursor-pointer"
         >
           <PlusCircle className="w-4 h-4 text-[#0a0e14]" strokeWidth={2.25} />
-          <span>LOG ANOTHER GLANCE</span>
+          <span>LOG ANOTHER ENCOUNTER</span>
         </button>
 
         <div className="grid grid-cols-2 gap-2.5">

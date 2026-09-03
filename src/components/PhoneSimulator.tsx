@@ -20,13 +20,14 @@ export const ALL_18_FLOW_STEPS: { step: FlowStep; num: number; label: string }[]
   { step: 'build', num: 9, label: 'Build' },
   { step: 'hair', num: 10, label: 'Hair' },
   { step: 'comments', num: 11, label: 'Comments' },
-  { step: 'review', num: 12, label: 'Review' },
-  { step: 'confirmation', num: 13, label: 'Confirmed' },
-  { step: 'create_report', num: 14, label: 'Create Report' },
-  { step: 'report_summary', num: 15, label: 'Report Summary' },
-  { step: 'engagements_list', num: 16, label: 'Engagements' },
-  { step: 'engagement_detail', num: 17, label: 'Detail' },
-  { step: 'settings', num: 18, label: 'Settings' },
+  { step: 'triggers', num: 12, label: 'Log Triggers' },
+  { step: 'review', num: 13, label: 'Review' },
+  { step: 'confirmation', num: 14, label: 'Confirmed' },
+  { step: 'create_report', num: 15, label: 'Create Report' },
+  { step: 'report_summary', num: 16, label: 'Report Summary' },
+  { step: 'engagements_list', num: 17, label: 'Engagements' },
+  { step: 'engagement_detail', num: 18, label: 'Detail' },
+  { step: 'settings', num: 19, label: 'Settings' },
 ];
 
 export const ALL_16_FLOW_STEPS = ALL_18_FLOW_STEPS;

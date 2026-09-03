@@ -39,11 +39,6 @@ export function HomeScreen({
           {/* Small Crest & Title */}
           <div className="flex items-center gap-2">
             <MainLogo size={28} glow={false} className="w-7 h-7 object-contain" />
-            <div className="flex flex-col text-left leading-tight">
-              <span className="font-serif-gold text-[9px] font-black tracking-[0.2em] text-[#f1ca63] uppercase">
-                LOOK AWAY
-              </span>
-            </div>
           </div>
 
           {/* 7D Streak Pill */}
@@ -65,11 +60,8 @@ export function HomeScreen({
         {/* Hero Crest Section */}
         <div className="flex flex-col items-center justify-center py-2 sm:py-3 text-center">
           <div className="relative drop-shadow-[0_0_20px_rgba(241,202,99,0.3)]">
-            <MainLogo size={110} glow={true} className="w-24 h-24 sm:w-28 sm:h-28 object-contain" />
+            <MainLogo size={135} glow={true} className="w-28 h-28 sm:w-32 sm:h-32 object-contain" />
           </div>
-          <h1 className="font-serif-gold text-lg sm:text-xl font-black tracking-[0.22em] text-[#f1ca63] uppercase mt-2 mb-0">
-            LOOK AWAY
-          </h1>
         </div>
 
         {/* Small Gold Divider */}
@@ -105,7 +97,7 @@ export function HomeScreen({
             </span>
             <div className="flex items-center justify-center gap-1 mt-1 text-emerald-400 font-bold text-xs">
               <Shield className="w-3.5 h-3.5" />
-              <span>Armed</span>
+              <span title="Tracking is active">ACTIVE</span>
             </div>
           </div>
         </div>

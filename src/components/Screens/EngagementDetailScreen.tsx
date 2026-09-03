@@ -9,6 +9,7 @@ import {
   MessageSquare,
   ChevronLeft,
   Edit3,
+  AlertCircle,
 } from 'lucide-react';
 
 interface EngagementDetailScreenProps {
@@ -52,7 +53,7 @@ export function EngagementDetailScreen({
         : 'Butt, Legs',
     },
     {
-      label: 'Her Build',
+      label: 'Her Body Type',
       icon: User,
       value: engagement.herBuild?.length
         ? engagement.herBuild.join(', ')
@@ -69,6 +70,13 @@ export function EngagementDetailScreen({
       value:
         engagement.comments ||
         'Visual engagement logged.',
+    },
+    {
+      label: 'Triggers',
+      icon: AlertCircle,
+      value: engagement.triggers?.length
+        ? engagement.triggers.map((entry) => entry.comment ? `${entry.trigger}: ${entry.comment}` : entry.trigger).join('; ')
+        : 'None recorded',
     },
   ];
 

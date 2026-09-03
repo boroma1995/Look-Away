@@ -178,9 +178,6 @@ export function AuthModal({
               </div>
 
               {/* Title & Motto */}
-              <h2 className="font-serif-gold text-xl sm:text-2xl font-black tracking-[0.25em] text-[#f1ca63] uppercase m-0 leading-tight">
-                LOOK AWAY
-              </h2>
               <p className="font-serif-gold text-xs font-medium tracking-[0.2em] text-[#d6b158] uppercase mt-2 mb-4">
                 STAY FOCUSED. STAY FAITHFUL.
               </p>
@@ -272,9 +269,6 @@ export function AuthModal({
               {/* Mini App Logo */}
               <div className="flex items-center justify-center gap-2 mb-4">
                 <MainLogo size={36} glow={false} className="w-9 h-9 object-contain" />
-                <span className="font-serif-gold text-sm font-bold tracking-widest text-[#f1ca63] uppercase">
-                  LOOK AWAY
-                </span>
               </div>
 
               {loginError && (
@@ -394,9 +388,6 @@ export function AuthModal({
               {/* Mini App Logo */}
               <div className="flex items-center justify-center gap-2 mb-4">
                 <MainLogo size={36} glow={false} className="w-9 h-9 object-contain" />
-                <span className="font-serif-gold text-sm font-bold tracking-widest text-[#f1ca63] uppercase">
-                  LOOK AWAY
-                </span>
               </div>
 
               {signUpError && (

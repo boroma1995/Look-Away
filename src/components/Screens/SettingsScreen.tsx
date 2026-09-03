@@ -98,7 +98,7 @@ export function SettingsScreen({
 
       {/* Header */}
       <div className="flex items-center gap-3 pb-2 mb-2">
-        <LionCrest size={40} glow={false} />
+        <LionCrest size={56} glow={false} />
         <div>
           <h2 className="font-serif-gold text-xl sm:text-2xl font-bold tracking-[0.2em] text-[#f1ca63] uppercase m-0 leading-tight">
             APP SETTINGS
@@ -206,7 +206,7 @@ export function SettingsScreen({
         </h3>
 
         <div className="text-xs text-[#b9b7ad] leading-relaxed">
-          Your visual engagements are stored locally and encrypted within your browser storage. You can export a JSON backup at any time or restore demo data.
+          A JSON backup is a portable copy of your profile and engagement history. Export it to keep a backup, then import it on another device or after reinstalling. Sample data is reference data for exploring the app.
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -236,7 +236,7 @@ export function SettingsScreen({
             className="btn-dark py-2.5 px-4 rounded text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer hover:border-[#eab308]"
           >
             <RotateCcw className="w-3.5 h-3.5 text-[#f1ca63]" strokeWidth={1.5} />
-            Reset Poster Sample Data
+            Reset Sample Data
           </button>
 
           <button

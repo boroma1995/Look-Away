@@ -32,6 +32,22 @@ export interface EngagementRecord {
   herBuild: string[];
   hairColor: string;
   comments: string;
+  triggers: TriggerEntry[];
+}
+
+export interface TriggerEntry {
+  trigger: string;
+  comment: string;
+}
+
+export interface ReportRecord {
+  id: string;
+  createdAt: string;
+  startDate: string;
+  endDate: string;
+  emailToSend: string;
+  generalComments: string;
+  triggers: TriggerEntry[];
 }
 
 export interface NewEngagementDraft {
@@ -49,6 +65,7 @@ export interface NewEngagementDraft {
   hairColor: string;
   hairColorOther: string;
   comments: string;
+  triggers: TriggerEntry[];
 }
 
 export type FlowStep =
@@ -63,6 +80,7 @@ export type FlowStep =
   | 'build'
   | 'hair'
   | 'comments'
+  | 'triggers'
   | 'review'
   | 'create_report'
   | 'report_summary'

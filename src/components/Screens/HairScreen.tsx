@@ -12,9 +12,10 @@ interface HairScreenProps {
 
 const HAIR_OPTIONS: { name: string; icon: typeof Sun }[] = [
   { name: 'BLONDE', icon: Sun },
-  { name: 'BROWN', icon: Feather },
+  { name: 'BROWN / AUBURN', icon: Feather },
   { name: 'BLACK', icon: Moon },
   { name: 'RED', icon: Flame },
+  { name: 'GRAY / WHITE', icon: Sun },
 ];
 
 export function HairScreen({

@@ -1,12 +1,4 @@
 import {
-  Activity,
-  Sparkles,
-  Scissors,
-  Layers,
-  Waves,
-  EyeOff,
-  AlertCircle,
-  MoreHorizontal,
   Check,
   ChevronLeft,
   ArrowRight,
@@ -22,15 +14,9 @@ interface AttireScreenProps {
   onSkip?: () => void;
 }
 
-const ATTIRE_ITEMS: { name: string; icon: typeof Activity }[] = [
-  { name: 'YOGA PANTS', icon: Activity },
-  { name: 'REVEALING TOP', icon: Sparkles },
-  { name: 'TIGHT SHORTS', icon: Scissors },
-  { name: 'TIGHT JEANS', icon: Layers },
-  { name: 'SWIM SUIT', icon: Waves },
-  { name: 'NUDITY', icon: EyeOff },
-  { name: 'FULL FRONTAL NUDITY', icon: AlertCircle },
-  { name: 'OTHER', icon: MoreHorizontal },
+const ATTIRE_ITEMS = [
+  'YOGA PANTS', 'REVEALING TOP', 'TIGHT SHORTS', 'TIGHT JEANS',
+  'SWIM SUIT', 'NUDITY', 'FULL FRONTAL NUDITY', 'OTHER',
 ];
 
 export function AttireScreen({
@@ -79,14 +65,13 @@ export function AttireScreen({
         {/* Option Rows */}
         <div className="space-y-2 my-auto py-1">
           {ATTIRE_ITEMS.map((item) => {
-            const isSelected = selectedAttire.includes(item.name);
-            const IconComponent = item.icon;
+            const isSelected = selectedAttire.includes(item);
             return (
               <button
-                key={item.name}
+                key={item}
                 type="button"
-                id={`attire-opt-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                onClick={() => onToggleAttire(item.name)}
+                id={`attire-opt-${item.toLowerCase().replace(/\s+/g, '-')}`}
+                onClick={() => onToggleAttire(item)}
                 className={`w-full py-2.5 px-3.5 rounded-xl font-serif-gold text-xs font-bold tracking-wider transition-all cursor-pointer flex items-center justify-between border ${
                   isSelected
                     ? 'bg-gradient-to-r from-[#d8a838] via-[#eec765] to-[#c9982c] border-[#f1ca63] text-[#0a0e14] shadow-[0_4px_16px_rgba(216,168,56,0.3)]'
@@ -94,14 +79,8 @@ export function AttireScreen({
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <IconComponent
-                    className={`w-4 h-4 shrink-0 ${
-                      isSelected ? 'text-[#0a0e14]' : 'text-[#f1ca63]'
-                    }`}
-                    strokeWidth={2}
-                  />
                   <span className={`font-serif-gold uppercase tracking-wider ${isSelected ? 'text-[#0a0e14] font-black' : 'text-[#eee]'}`}>
-                    {item.name}
+                    {item}
                   </span>
                 </div>
 

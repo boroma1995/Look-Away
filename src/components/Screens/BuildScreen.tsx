@@ -45,7 +45,7 @@ export function BuildScreen({
       <div>
         <div className="pb-3 pt-1">
           <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-[#f1ca63]">
-            <span>STEP 6 OF 8 • HER BUILD</span>
+            <span>STEP 6 OF 8 • HER BODY TYPE</span>
             <span>75%</span>
           </div>
           {/* Progress Bar */}
@@ -60,7 +60,7 @@ export function BuildScreen({
         {/* Title Section */}
         <div className="text-center pt-2 pb-3">
           <h2 className="font-serif-gold text-base sm:text-lg font-black tracking-[0.2em] text-[#f1ca63] uppercase m-0">
-            HER BUILD
+            HER BODY TYPE
           </h2>
 
           <div className="flex items-center justify-center my-1.5 opacity-60">

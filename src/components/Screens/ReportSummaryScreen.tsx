@@ -1,5 +1,5 @@
 import { MainLogo } from '../LionCrest';
-import { UserProfile, EngagementRecord } from '../../types';
+import { UserProfile, EngagementRecord, TriggerEntry } from '../../types';
 import {
   ArrowLeft,
   Heart,
@@ -15,6 +15,8 @@ interface ReportSummaryScreenProps {
   engagements: EngagementRecord[];
   onBack: () => void;
   onViewEngagements: () => void;
+  generalComments?: string;
+  triggerEntries?: TriggerEntry[];
 }
 
 const SUMMARY_TABLE_DATA = [
@@ -47,7 +49,7 @@ const SUMMARY_TABLE_DATA = [
     weeklyCount: 'Breasts',
   },
   {
-    category: 'Her Build',
+    category: 'Her Body Type',
     icon: User,
     mostCommon: 'Curvy',
     highestScore: 'Long Legs',
@@ -67,6 +69,8 @@ export function ReportSummaryScreen({
   engagements,
   onBack,
   onViewEngagements,
+  generalComments = '',
+  triggerEntries = [],
 }: ReportSummaryScreenProps) {
   const avgScore = engagements.length
     ? (
@@ -161,6 +165,26 @@ export function ReportSummaryScreen({
             </table>
           </div>
         </div>
+
+        {generalComments && (
+          <div className="mt-4 bg-[#030814] border border-[#765b24]/60 rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-wider text-[#f1ca63] font-bold mb-1">
+              General Comments / Observations
+            </div>
+            <p className="text-xs text-[#eee] leading-relaxed m-0">{generalComments}</p>
+          </div>
+        )}
+
+        {triggerEntries.length > 0 && (
+          <div className="mt-4 bg-[#030814] border border-[#765b24]/60 rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-wider text-[#f1ca63] font-bold mb-1">
+              Logged Triggers
+            </div>
+            <p className="text-xs text-[#eee] leading-relaxed m-0">
+              {triggerEntries.map((entry) => entry.comment ? `${entry.trigger}: ${entry.comment}` : entry.trigger).join('; ')}
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Bottom Button to View Engagements List */}

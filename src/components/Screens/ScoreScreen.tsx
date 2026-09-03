@@ -18,13 +18,13 @@ const SCORE_LEVELS: {
   {
     level: 1,
     title: '1 - SEE',
-    description: 'Accidental glance, noticed and looked away immediately',
+    description: 'Saw her, then looked away immediately',
     icon: Eye,
   },
   {
     level: 2,
     title: '2 - LOOK',
-    description: 'Deliberate or second glance, took conscious effort to look away',
+    description: 'A second look that took conscious effort to redirect',
     icon: EyeOff,
   },
   {
@@ -80,7 +80,7 @@ export function ScoreScreen({
           </div>
 
           <p className="text-xs text-[#b9b7ad] font-normal tracking-wide m-0">
-            How serious was the engagement?
+            HOW DID YOU LOOK?
           </p>
         </div>
 

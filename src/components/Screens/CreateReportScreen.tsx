@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { UserProfile } from '../../types';
+import { TriggerEntry } from '../../types';
+import { TriggersScreen } from './TriggersScreen';
 import {
   ArrowLeft,
   Check,
@@ -7,6 +9,7 @@ import {
   CalendarDays,
   Clock,
   SlidersHorizontal,
+  Smartphone,
 } from 'lucide-react';
 
 interface CreateReportScreenProps {
@@ -14,7 +17,7 @@ interface CreateReportScreenProps {
   startDate: string;
   endDate: string;
   onUpdateDates: (start: string, end: string) => void;
-  onGenerateReport: (emailToSend: string) => void;
+  onGenerateReport: (emailToSend: string, phoneToSend: string, generalComments: string, triggers: TriggerEntry[]) => void;
   onBack: () => void;
 }
 
@@ -32,11 +35,38 @@ export function CreateReportScreen({
 }: CreateReportScreenProps) {
   const [selectedPeriod, setSelectedPeriod] = useState('LAST 7 DAYS');
   const [email, setEmail] = useState(user.email || 'email@example.com');
+  const [phone, setPhone] = useState(user.phone || '');
+  const [generalComments, setGeneralComments] = useState('');
+  const [selectedTriggers, setSelectedTriggers] = useState<TriggerEntry[]>([]);
+  const [showTriggers, setShowTriggers] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onGenerateReport(email);
+  const handleSubmit = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    onGenerateReport(email, phone, generalComments, selectedTriggers);
   };
+
+  if (showTriggers) {
+    return (
+      <TriggersScreen
+        selectedTriggers={selectedTriggers}
+        onToggleTrigger={(trigger) =>
+          setSelectedTriggers((current) =>
+            current.some((entry) => entry.trigger === trigger)
+              ? current.filter((entry) => entry.trigger !== trigger)
+              : [...current, { trigger, comment: '' }]
+          )
+        }
+        onChangeComment={(trigger, comment) =>
+          setSelectedTriggers((current) =>
+            current.map((entry) => (entry.trigger === trigger ? { ...entry, comment } : entry))
+          )
+        }
+        onNext={handleSubmit}
+        onBack={() => setShowTriggers(false)}
+        nextLabel="GENERATE REPORT"
+      />
+    );
+  }
 
   return (
     <div className="w-full h-full min-h-[520px] max-w-[380px] mx-auto p-4 sm:p-5 flex flex-col justify-between select-none">
@@ -117,6 +147,46 @@ export function CreateReportScreen({
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
             className="w-full bg-[#030814] text-[#eee] placeholder:text-[#6e6e6a] border border-[#765b24]/60 rounded-xl py-3 px-4 text-xs sm:text-sm outline-none focus:border-[#f1ca63]"
+          />
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setShowTriggers(true)}
+          className="w-full mt-4 py-3 rounded-xl font-serif-gold text-xs font-bold tracking-widest text-[#f1ca63] bg-[#030814] border border-[#765b24]/60 hover:border-[#f1ca63] uppercase"
+        >
+          LOG TRIGGERS {selectedTriggers.length ? `(${selectedTriggers.length})` : ''}
+        </button>
+
+        <div className="pt-4">
+          <p className="text-xs sm:text-sm text-[#8c8c88] font-normal tracking-wide pb-2 text-left">
+            Text Report To Phone
+          </p>
+          <div className="relative">
+            <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8b681f]" />
+            <input
+              type="tel"
+              id="report-phone-input"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="(555) 234-5678"
+              className="w-full bg-[#030814] text-[#eee] placeholder:text-[#6e6e6a] border border-[#765b24]/60 rounded-xl py-3 pl-10 pr-4 text-xs sm:text-sm outline-none focus:border-[#f1ca63]"
+            />
+          </div>
+        </div>
+
+        <div className="pt-4">
+          <p className="text-xs sm:text-sm text-[#8c8c88] font-normal tracking-wide pb-2 text-left">
+            General Comments / Observations
+          </p>
+          <textarea
+            id="report-comments-textarea"
+            value={generalComments}
+            onChange={(e) => setGeneralComments(e.target.value)}
+            maxLength={1000}
+            rows={4}
+            placeholder="Add observations for your therapist or accountability partner..."
+            className="w-full bg-[#030814] text-[#eee] placeholder:text-[#6e6e6a] border border-[#765b24]/60 rounded-xl py-3 px-4 text-xs sm:text-sm outline-none focus:border-[#f1ca63] resize-none"
           />
         </div>
       </div>

@@ -7,6 +7,7 @@ import {
   FlowStep,
   ViewMode,
   ScoreLevel,
+  ReportRecord,
 } from './types';
 import { INITIAL_ENGAGEMENTS, INITIAL_USER, SCORE_OPTIONS } from './data/constants';
 import { Header, BottomNavBar } from './components/Navigation';
@@ -32,6 +33,7 @@ import { EngagementsListScreen } from './components/Screens/EngagementsListScree
 import { EngagementDetailScreen } from './components/Screens/EngagementDetailScreen';
 import { ReportsDashboard } from './components/Screens/ReportsDashboard';
 import { SettingsScreen } from './components/Screens/SettingsScreen';
+import { TriggersScreen } from './components/Screens/TriggersScreen';
 
 const EMPTY_DRAFT: NewEngagementDraft = {
   score: null,
@@ -48,6 +50,7 @@ const EMPTY_DRAFT: NewEngagementDraft = {
   hairColor: '',
   hairColorOther: '',
   comments: '',
+  triggers: [],
 };
 
 export default function App() {
@@ -97,6 +100,14 @@ export default function App() {
 
   const [startDate, setStartDate] = useState<string>('2025-04-24');
   const [endDate, setEndDate] = useState<string>('2025-05-24');
+  const [lastReport, setLastReport] = useState<ReportRecord | null>(() => {
+    try {
+      const saved = localStorage.getItem('lookaway_last_report');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
 
   // Persistence
   useEffect(() => {
@@ -114,6 +125,10 @@ export default function App() {
       console.error(e);
     }
   }, [engagements]);
+
+  useEffect(() => {
+    if (lastReport) localStorage.setItem('lookaway_last_report', JSON.stringify(lastReport));
+  }, [lastReport]);
 
   // Auth Handlers
   const handleLogin = (profile: UserProfile) => {
@@ -278,6 +293,7 @@ export default function App() {
       herBuild: finalBuild,
       hairColor: finalHair,
       comments: draft.comments.trim() || 'Visual engagement logged.',
+      triggers: draft.triggers,
     };
 
     setEngagements((prev) => [newRecord, ...prev]);
@@ -437,8 +453,33 @@ export default function App() {
           <CommentsScreen
             comments={draft.comments}
             onChangeComments={(t) => setDraft((p) => ({ ...p, comments: t }))}
-            onNext={() => setCurrentStep('review')}
+            onNext={() => setCurrentStep('triggers')}
             onBack={() => setCurrentStep('hair')}
+          />
+        );
+
+      case 'triggers':
+        return (
+          <TriggersScreen
+            selectedTriggers={draft.triggers}
+            onToggleTrigger={(trigger) =>
+              setDraft((prev) => ({
+                ...prev,
+                triggers: prev.triggers.some((entry) => entry.trigger === trigger)
+                  ? prev.triggers.filter((entry) => entry.trigger !== trigger)
+                  : [...prev.triggers, { trigger, comment: '' }],
+              }))
+            }
+            onChangeComment={(trigger, comment) =>
+              setDraft((prev) => ({
+                ...prev,
+                triggers: prev.triggers.map((entry) =>
+                  entry.trigger === trigger ? { ...entry, comment } : entry
+                ),
+              }))
+            }
+            onNext={() => setCurrentStep('review')}
+            onBack={() => setCurrentStep('comments')}
           />
         );
 
@@ -471,7 +512,21 @@ export default function App() {
               setStartDate(s);
               setEndDate(e);
             }}
-            onGenerateReport={() => setCurrentStep('report_summary')}
+            onGenerateReport={(emailToSend, phoneToSend, generalComments, reportTriggers) => {
+              const report: ReportRecord = {
+                id: `report-${Date.now()}`,
+                createdAt: new Date().toISOString(),
+                startDate,
+                endDate,
+                emailToSend,
+                generalComments: generalComments.trim(),
+                triggers: reportTriggers.length
+                  ? reportTriggers
+                  : engagements.flatMap((engagement) => engagement.triggers || []),
+              };
+              setLastReport(report);
+              setCurrentStep('report_summary');
+            }}
             onBack={() => setCurrentStep('home')}
           />
         );
@@ -481,6 +536,8 @@ export default function App() {
           <ReportSummaryScreen
             user={user}
             engagements={engagements}
+            generalComments={lastReport?.generalComments || ''}
+            triggerEntries={lastReport?.triggers || []}
             onBack={() => setCurrentStep('create_report')}
             onViewEngagements={() => setCurrentStep('engagements_list')}
           />
@@ -570,26 +627,34 @@ export default function App() {
       {/* App Container: Reverted back to clean, fully interactive state */}
       <div className="relative z-10 w-full max-w-[1240px] mx-auto px-2.5 sm:px-6 py-2.5 sm:py-5 transition-all duration-300">
         {/* Header */}
-        <Header
-          user={user}
-          currentStep={currentStep}
-          viewMode={viewMode}
-          onSetViewMode={setViewMode}
-          onNavigate={(step) => setCurrentStep(step)}
-          streakDays={7}
-          isAuthenticated={isAuthenticated}
-          onOpenAuthModal={() => {
-            setAuthModalInitialView('login');
-            setIsAuthModalOpen(true);
-          }}
-          onLogout={handleLogout}
-        />
+        {!Capacitor.isNativePlatform() && (
+          <Header
+            user={user}
+            currentStep={currentStep}
+            viewMode={viewMode}
+            onSetViewMode={setViewMode}
+            onNavigate={(step) => setCurrentStep(step)}
+            streakDays={7}
+            isAuthenticated={isAuthenticated}
+            onOpenAuthModal={() => {
+              setAuthModalInitialView('login');
+              setIsAuthModalOpen(true);
+            }}
+            onLogout={handleLogout}
+          />
+        )}
 
         {/* View Mode Switching: Mobile Device Simulator / 16-Screens Matrix / Web Desktop Layout */}
         {viewMode === 'mobile' ? (
-          <PhoneSimulator currentStep={currentStep} onSetStep={setCurrentStep}>
-            {renderScreen()}
-          </PhoneSimulator>
+          Capacitor.isNativePlatform() ? (
+            <main className="w-full min-h-screen pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
+              {renderScreen()}
+            </main>
+          ) : (
+            <PhoneSimulator currentStep={currentStep} onSetStep={setCurrentStep}>
+              {renderScreen()}
+            </PhoneSimulator>
+          )
         ) : viewMode === 'showcase' ? (
           <ShowcaseView
             user={user}

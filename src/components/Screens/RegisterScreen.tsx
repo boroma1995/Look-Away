@@ -55,12 +55,8 @@ export function RegisterScreen({
             <MainLogo size={80} glow={true} className="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
           </div>
 
-          <h1 className="font-serif-gold text-lg sm:text-xl font-black tracking-[0.22em] text-[#f1ca63] uppercase mt-2 mb-0">
-            LOOK AWAY
-          </h1>
-
           <p className="font-serif-gold text-[9.5px] sm:text-[10px] font-bold tracking-[0.16em] text-[#d6b158] uppercase mt-1 mb-1.5">
-            EYES OF INTEGRITY • VISUAL DISCIPLINE SUITE
+            EYES OF INTEGRITY
           </p>
 
           {/* Gold Star Divider */}

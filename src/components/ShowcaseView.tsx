@@ -167,6 +167,7 @@ export function ShowcaseView({
     hairColor: 'BROWN',
     hairColorOther: '',
     comments: 'She was at the gas station and walking to her car.',
+    triggers: [],
   };
 
   const sampleEngagement = engagements[0] || {
@@ -183,6 +184,7 @@ export function ShowcaseView({
     herBuild: ['Curvy', 'Long Legs'],
     hairColor: 'Brown',
     comments: 'Visual engagement logged.',
+    triggers: [],
   };
 
   // Define all 18 screens with metadata and render function
@@ -310,7 +312,7 @@ export function ShowcaseView({
     },
     {
       number: 9,
-      title: 'Step 6: Her Build',
+      title: 'Step 6: Her Body Type',
       category: 'logging',
       step: 'build',
       render: () => (

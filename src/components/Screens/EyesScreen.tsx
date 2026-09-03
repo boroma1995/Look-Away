@@ -23,7 +23,9 @@ const EYES_ITEMS: { name: string; icon: typeof CircleDot }[] = [
   { name: 'BREASTS', icon: CircleDot },
   { name: 'BUTT', icon: Target },
   { name: 'LEGS', icon: Maximize2 },
-  { name: 'CROTCH', icon: Crosshair },
+  { name: 'PELVIC REGION', icon: Crosshair },
+  { name: 'FACE', icon: CircleDot },
+  { name: 'HAIR', icon: CircleDot },
   { name: 'THE WHOLE PACKAGE', icon: Scan },
 ];
 
@@ -54,7 +56,7 @@ export function EyesScreen({
         {/* Title Section */}
         <div className="text-center pt-2 pb-3">
           <h2 className="font-serif-gold text-base sm:text-lg font-black tracking-[0.2em] text-[#f1ca63] uppercase m-0">
-            WHERE DID YOUR EYES GO?
+            WHERE DID YOUR EYES GO
           </h2>
 
           <div className="flex items-center justify-center my-1.5 opacity-60">
@@ -85,12 +87,6 @@ export function EyesScreen({
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <IconComponent
-                    className={`w-4 h-4 shrink-0 ${
-                      isSelected ? 'text-[#0a0e14]' : 'text-[#f1ca63]'
-                    }`}
-                    strokeWidth={2}
-                  />
                   <span className={`font-serif-gold uppercase tracking-wider ${isSelected ? 'text-[#0a0e14] font-black' : 'text-[#eee]'}`}>
                     {item.name}
                   </span>

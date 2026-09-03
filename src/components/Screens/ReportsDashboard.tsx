@@ -80,7 +80,7 @@ export function ReportsDashboard({
           { category: 'LOCATION', item: 'None', freq: '0%', icon: MapPin },
           { category: 'ATTIRE', item: 'None', freq: '0%', icon: Sparkles },
           { category: 'EYES WENT TO', item: 'None', freq: '0%', icon: Eye },
-          { category: 'HER BUILD', item: 'None', freq: '0%', icon: User },
+          { category: 'HER BODY TYPE', item: 'None', freq: '0%', icon: User },
           { category: 'HAIR COLOR', item: 'None', freq: '0%', icon: Palette },
         ],
       };
@@ -124,7 +124,7 @@ export function ReportsDashboard({
         { category: 'LOCATION', item: topLocation.item, freq: topLocation.freq, icon: MapPin },
         { category: 'ATTIRE', item: topAttire.item, freq: topAttire.freq, icon: Sparkles },
         { category: 'EYES WENT TO', item: topEyes.item, freq: topEyes.freq, icon: Eye },
-        { category: 'HER BUILD', item: topBuild.item, freq: topBuild.freq, icon: User },
+        { category: 'HER BODY TYPE', item: topBuild.item, freq: topBuild.freq, icon: User },
         { category: 'HAIR COLOR', item: topHair.item, freq: topHair.freq, icon: Palette },
       ],
     };
@@ -629,7 +629,7 @@ export function ReportsDashboard({
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#765b24]/30 py-1.5 gap-1">
                     <span className="text-[11px] font-bold text-[#e6c866] uppercase flex items-center gap-1.5 shrink-0">
                       <User className="w-3.5 h-3.5 text-[#f1ca63]" strokeWidth={1.75} />
-                      Her Build:
+                      Her Body Type:
                     </span>
                     <span className="text-[11px] text-[#f7f4e8] font-medium sm:text-right break-words">
                       {selectedEngagement.herBuild.join(', ') || 'N/A'}
