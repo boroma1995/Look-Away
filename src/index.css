@@ -20,6 +20,11 @@
     --muted: #b9b7ad;
     --muted2: #d5d4ca;
     --line: #8b681f;
+    color-scheme: dark;
+  }
+
+  html {
+    background: #030814;
   }
 
   body {
@@ -31,6 +36,16 @@
       linear-gradient(45deg, transparent 0 80%, rgba(205, 160, 52, 0.02) 80.2%, transparent 80.7%);
     min-height: 100vh;
     overflow-x: hidden;
+  }
+
+  .native-app-content {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .native-bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(58px + env(safe-area-inset-bottom));
   }
 
   h1, h2, h3, h4, .font-serif, .font-serif-gold {

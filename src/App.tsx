@@ -8,6 +8,7 @@ import {
   ViewMode,
   ScoreLevel,
   ReportRecord,
+  AdminUserRecord,
 } from './types';
 import { INITIAL_ENGAGEMENTS, INITIAL_USER, SCORE_OPTIONS } from './data/constants';
 import { Header, BottomNavBar } from './components/Navigation';
@@ -34,6 +35,7 @@ import { EngagementDetailScreen } from './components/Screens/EngagementDetailScr
 import { ReportsDashboard } from './components/Screens/ReportsDashboard';
 import { SettingsScreen } from './components/Screens/SettingsScreen';
 import { TriggersScreen } from './components/Screens/TriggersScreen';
+import { AdminScreen } from './components/Screens/AdminScreen';
 
 const EMPTY_DRAFT: NewEngagementDraft = {
   score: null,
@@ -108,6 +110,24 @@ export default function App() {
       return null;
     }
   });
+  const [reports, setReports] = useState<ReportRecord[]>(() => {
+    try {
+      const saved = localStorage.getItem('lookaway_reports');
+      if (saved) return JSON.parse(saved);
+      const last = localStorage.getItem('lookaway_last_report');
+      return last ? [JSON.parse(last)] : [];
+    } catch {
+      return [];
+    }
+  });
+  const [adminUsers, setAdminUsers] = useState<AdminUserRecord[]>(() => {
+    try {
+      const saved = localStorage.getItem('lookaway_admin_users');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
 
   // Persistence
   useEffect(() => {
@@ -129,6 +149,21 @@ export default function App() {
   useEffect(() => {
     if (lastReport) localStorage.setItem('lookaway_last_report', JSON.stringify(lastReport));
   }, [lastReport]);
+
+  useEffect(() => {
+    localStorage.setItem('lookaway_reports', JSON.stringify(reports));
+  }, [reports]);
+
+  useEffect(() => {
+    setAdminUsers((previous) => {
+      const nextRecord: AdminUserRecord = { ...user, engagements, reports };
+      const next = previous.some((record) => record.email === user.email)
+        ? previous.map((record) => (record.email === user.email ? nextRecord : record))
+        : [...previous, nextRecord];
+      localStorage.setItem('lookaway_admin_users', JSON.stringify(next));
+      return next;
+    });
+  }, [user, engagements, reports]);
 
   // Auth Handlers
   const handleLogin = (profile: UserProfile) => {
@@ -525,6 +560,7 @@ export default function App() {
                   : engagements.flatMap((engagement) => engagement.triggers || []),
               };
               setLastReport(report);
+              setReports((previous) => [report, ...previous]);
               setCurrentStep('report_summary');
             }}
             onBack={() => setCurrentStep('home')}
@@ -593,6 +629,9 @@ export default function App() {
           />
         );
 
+      case 'admin':
+        return <AdminScreen users={adminUsers} engagements={engagements} reports={reports} onLogout={() => setCurrentStep('home')} />;
+
       default:
         return null;
     }
@@ -641,13 +680,14 @@ export default function App() {
               setIsAuthModalOpen(true);
             }}
             onLogout={handleLogout}
+            onOpenAdmin={() => setCurrentStep('admin')}
           />
         )}
 
         {/* View Mode Switching: Mobile Device Simulator / 16-Screens Matrix / Web Desktop Layout */}
         {viewMode === 'mobile' ? (
           Capacitor.isNativePlatform() ? (
-            <main className="w-full min-h-screen pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
+            <main className="native-app-content w-full min-h-screen">
               {renderScreen()}
             </main>
           ) : (
@@ -742,6 +782,7 @@ export default function App() {
       <BottomNavBar
         currentStep={currentStep}
         onNavigate={(step) => setCurrentStep(step)}
+        onOpenAdmin={() => setCurrentStep('admin')}
       />
     </div>
   );

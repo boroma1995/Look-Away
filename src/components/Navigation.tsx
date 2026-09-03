@@ -13,6 +13,7 @@ import {
   User,
   LogOut,
   LogIn,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -25,6 +26,7 @@ interface HeaderProps {
   isAuthenticated?: boolean;
   onOpenAuthModal?: () => void;
   onLogout?: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export function Header({
@@ -37,6 +39,7 @@ export function Header({
   isAuthenticated = true,
   onOpenAuthModal,
   onLogout,
+  onOpenAdmin,
 }: HeaderProps) {
   const isLogging = [
     'score',
@@ -199,6 +202,19 @@ export function Header({
             </button>
           </div>
 
+          {onOpenAdmin && (
+            <button
+              type="button"
+              id="header-admin-btn"
+              title="Open admin records"
+              onClick={onOpenAdmin}
+              className="hidden lg:flex items-center gap-1 p-2 rounded-lg bg-[#030814] border border-[#8b681f]/60 text-[#b9b7ad] hover:text-[#f1ca63] hover:border-[#f1ca63] transition-colors cursor-pointer text-xs"
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline">ADMIN</span>
+            </button>
+          )}
+
           {/* Quick Log Out button on desktop if authenticated */}
           {isAuthenticated && onLogout && (
             <button
@@ -223,9 +239,11 @@ export function Header({
 export function BottomNavBar({
   currentStep,
   onNavigate,
+  onOpenAdmin,
 }: {
   currentStep: FlowStep;
   onNavigate: (step: FlowStep) => void;
+  onOpenAdmin?: () => void;
 }) {
   const isLogging = [
     'score',
@@ -249,7 +267,7 @@ export function BottomNavBar({
   ].includes(currentStep);
 
   return (
-    <div className="fixed left-0 right-0 sm:left-1/2 bottom-0 sm:-translate-x-1/2 w-full sm:w-[900px] sm:max-w-[calc(100%-20px)] h-[58px] sm:h-[64px] bg-[#030814] border-t sm:border-x sm:border-t border-[#6b5220] rounded-none sm:rounded-t-xl grid grid-cols-4 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.95)]">
+    <div className={`native-bottom-nav fixed left-0 right-0 sm:left-1/2 bottom-0 sm:-translate-x-1/2 w-full sm:w-[900px] sm:max-w-[calc(100%-20px)] h-[58px] sm:h-[64px] bg-[#030814] border-t sm:border-x sm:border-t border-[#6b5220] rounded-none sm:rounded-t-xl grid ${onOpenAdmin ? 'grid-cols-5' : 'grid-cols-4'} z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.95)]`}>
       <button
         id="bottom-nav-home"
         onClick={() => onNavigate('home')}
@@ -313,6 +331,18 @@ export function BottomNavBar({
         <Settings className="w-4 h-4" strokeWidth={1.5} />
         <span className="tracking-widest uppercase">SETTINGS</span>
       </button>
+
+      {onOpenAdmin && (
+        <button
+          id="bottom-nav-admin"
+          onClick={onOpenAdmin}
+          className={`bg-transparent py-1.5 sm:py-2 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-colors cursor-pointer relative ${currentStep === 'admin' ? 'text-[#f1ca63] bg-[#c9982c]/15' : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#030814]'}`}
+        >
+          {currentStep === 'admin' && <span className="absolute top-0 inset-x-2 h-[2px] bg-[#f1ca63] shadow-[0_0_8px_#f1ca63]" />}
+          <ShieldCheck className="w-4 h-4" strokeWidth={1.5} />
+          <span className="tracking-widest uppercase">ADMIN</span>
+        </button>
+      )}
     </div>
   );
 }

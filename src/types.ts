@@ -50,6 +50,11 @@ export interface ReportRecord {
   triggers: TriggerEntry[];
 }
 
+export interface AdminUserRecord extends UserProfile {
+  engagements: EngagementRecord[];
+  reports: ReportRecord[];
+}
+
 export interface NewEngagementDraft {
   score: ScoreLevel | null;
   feelings: string[];
@@ -87,7 +92,8 @@ export type FlowStep =
   | 'engagements_list'
   | 'engagement_detail'
   | 'confirmation'
-  | 'settings';
+  | 'settings'
+  | 'admin';
 
 export type MainNavTab = 'home' | 'log' | 'reports' | 'settings';
 
