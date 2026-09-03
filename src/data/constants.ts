@@ -1,0 +1,197 @@
+import { EngagementRecord, ScoreOption, UserProfile } from '../types';
+
+export const SCORE_OPTIONS: ScoreOption[] = [
+  {
+    level: 1,
+    code: '1 - SEE',
+    title: '1 - SEE',
+    description: 'Accidental glance, noticed and looked away immediately',
+    icon: 'Eye',
+  },
+  {
+    level: 2,
+    code: '2 - LOOK',
+    title: '2 - LOOK',
+    description: 'Deliberate or second glance, took conscious effort to look away',
+    icon: 'EyeOff',
+  },
+  {
+    level: 3,
+    code: '3 - LOOK LONG',
+    title: '3 - LOOK LONG',
+    description: 'Prolonged fixation or lingering gaze (> 2-3 seconds)',
+    icon: 'Clock',
+  },
+  {
+    level: 4,
+    code: '4 - LOOK WITH LONGING',
+    title: '4 - LOOK WITH LONGING',
+    description: 'Sustained lustful gaze, fantasy, or emotional craving',
+    icon: 'Heart',
+  },
+];
+
+export const FEELING_OPTIONS = [
+  { id: 'neutral', label: 'NEUTRAL', icon: 'Smile' },
+  { id: 'hungry', label: 'HUNGRY', icon: 'Utensils' },
+  { id: 'angry', label: 'ANGRY', icon: 'Flame' },
+  { id: 'lonely', label: 'LONELY', icon: 'UserX' },
+  { id: 'tired', label: 'TIRED', icon: 'Moon' },
+  { id: 'stressed', label: 'STRESSED', icon: 'Zap' },
+  { id: 'bored', label: 'BORED', icon: 'Coffee' },
+  { id: 'other', label: 'OTHER', icon: 'HelpCircle' },
+];
+
+export const LOCATION_OPTIONS = [
+  { id: 'home', label: 'HOME', icon: 'Home' },
+  { id: 'work', label: 'WORK', icon: 'Briefcase' },
+  { id: 'driving', label: 'DRIVING', icon: 'Car' },
+  { id: 'shopping', label: 'SHOPPING', icon: 'ShoppingBag' },
+  { id: 'church', label: 'CHURCH', icon: 'Church' },
+  { id: 'on_phone', label: 'ON PHONE', icon: 'Smartphone' },
+  { id: 'on_tv', label: 'ON TV', icon: 'Tv' },
+  { id: 'on_computer', label: 'ON COMPUTER', icon: 'Monitor' },
+  { id: 'other', label: 'OTHER', icon: 'Compass' },
+];
+
+export const ATTIRE_OPTIONS = [
+  { id: 'yoga_pants', label: 'YOGA PANTS', icon: 'Layers' },
+  { id: 'revealing_top', label: 'REVEALING TOP', icon: 'Shirt' },
+  { id: 'tight_shorts', label: 'TIGHT SHORTS', icon: 'Scissors' },
+  { id: 'tight_jeans', label: 'TIGHT JEANS', icon: 'Activity' },
+  { id: 'swim_suit', label: 'SWIM SUIT', icon: 'Waves' },
+  { id: 'nudity', label: 'NUDITY', icon: 'ShieldAlert' },
+  { id: 'full_frontal', label: 'FULL FRONTAL NUDITY', icon: 'AlertTriangle' },
+  { id: 'other', label: 'OTHER', icon: 'MoreHorizontal' },
+];
+
+export const EYES_OPTIONS = [
+  { id: 'breasts', label: 'BREASTS', icon: 'CircleDot' },
+  { id: 'butt', label: 'BUTT', icon: 'HeartHandshake' },
+  { id: 'legs', label: 'LEGS', icon: 'MoveDown' },
+  { id: 'crotch', label: 'CROTCH', icon: 'Shield' },
+  { id: 'whole_package', label: 'THE WHOLE PACKAGE', icon: 'Sparkles' },
+  { id: 'other', label: 'OTHER', icon: 'Eye' },
+];
+
+export const BUILD_OPTIONS = [
+  { id: 'athletic', label: 'ATHLETIC', icon: 'Dumbbell' },
+  { id: 'curvy', label: 'CURVY', icon: 'TrendingUp' },
+  { id: 'thin', label: 'THIN', icon: 'Minus' },
+  { id: 'tall', label: 'TALL', icon: 'ArrowUp' },
+  { id: 'short', label: 'SHORT', icon: 'ArrowDown' },
+  { id: 'long_legs', label: 'LONG LEGS', icon: 'ChevronUp' },
+  { id: 'big_breasts', label: 'BIG BREASTS', icon: 'Circle' },
+  { id: 'shapely_butt', label: 'SHAPELY BUTT', icon: 'Award' },
+  { id: 'other', label: 'OTHER', icon: 'User' },
+];
+
+export const HAIR_OPTIONS = [
+  { id: 'blonde', label: 'BLONDE', color: '#F1CA63', bgClass: 'bg-[#F1CA63]' },
+  { id: 'brown', label: 'BROWN', color: '#8D5B28', bgClass: 'bg-[#8D5B28]' },
+  { id: 'black', label: 'BLACK', color: '#181818', bgClass: 'bg-[#181818]' },
+  { id: 'red', label: 'RED', color: '#C83226', bgClass: 'bg-[#C83226]' },
+  { id: 'other', label: 'OTHER', color: '#765B24', bgClass: 'bg-[#765B24]' },
+];
+
+export const INITIAL_ENGAGEMENTS: EngagementRecord[] = [
+  {
+    id: 'eng-1',
+    timestamp: '2025-05-24T10:15:00.000Z',
+    dateStr: 'May 24, 2025',
+    timeStr: '10:15 AM',
+    score: 2,
+    scoreLabel: '2 – LOOK',
+    feelings: ['Hungry', 'Stressed'],
+    locations: ['Driving', 'On Phone'],
+    attire: ['Yoga Pants', 'Tight Jeans'],
+    eyesWentTo: ['Butt', 'Legs'],
+    herBuild: ['Curvy', 'Long Legs'],
+    hairColor: 'Brown',
+    comments: 'She was at the gas station and walking to her car.',
+  },
+  {
+    id: 'eng-2',
+    timestamp: '2025-05-23T18:45:00.000Z',
+    dateStr: 'May 23, 2025',
+    timeStr: '6:45 PM',
+    score: 3,
+    scoreLabel: '3 – LOOK LONG',
+    feelings: ['Tired', 'Stressed'],
+    locations: ['Shopping'],
+    attire: ['Tight Shorts'],
+    eyesWentTo: ['Legs', 'Butt'],
+    herBuild: ['Athletic'],
+    hairColor: 'Blonde',
+    comments: 'Lingered in the supermarket produce section. Refocused mind.',
+  },
+  {
+    id: 'eng-3',
+    timestamp: '2025-05-23T13:20:00.000Z',
+    dateStr: 'May 23, 2025',
+    timeStr: '1:20 PM',
+    score: 1,
+    scoreLabel: '1 – SEE',
+    feelings: ['Neutral'],
+    locations: ['Work'],
+    attire: ['Revealing Top'],
+    eyesWentTo: ['Breasts'],
+    herBuild: ['Curvy'],
+    hairColor: 'Black',
+    comments: 'Turned eyes away immediately upon walking into the meeting room.',
+  },
+  {
+    id: 'eng-4',
+    timestamp: '2025-05-22T08:30:00.000Z',
+    dateStr: 'May 22, 2025',
+    timeStr: '8:30 AM',
+    score: 2,
+    scoreLabel: '2 – LOOK',
+    feelings: ['Bored', 'Lonely'],
+    locations: ['On Phone'],
+    attire: ['Swim Suit'],
+    eyesWentTo: ['The Whole Package'],
+    herBuild: ['Thin', 'Long Legs'],
+    hairColor: 'Blonde',
+    comments: 'Social media algorithmic feed trap. Promptly closed the application.',
+  },
+  {
+    id: 'eng-5',
+    timestamp: '2025-05-21T19:10:00.000Z',
+    dateStr: 'May 21, 2025',
+    timeStr: '7:10 PM',
+    score: 4,
+    scoreLabel: '4 – LOOK WITH LONGING',
+    feelings: ['Lonely', 'Tired'],
+    locations: ['On TV'],
+    attire: ['Nudity'],
+    eyesWentTo: ['The Whole Package'],
+    herBuild: ['Curvy', 'Big Breasts'],
+    hairColor: 'Red',
+    comments: 'Unexpected explicit scene during evening television. Turned off display.',
+  },
+  {
+    id: 'eng-6',
+    timestamp: '2025-05-21T12:05:00.000Z',
+    dateStr: 'May 21, 2025',
+    timeStr: '12:05 PM',
+    score: 2,
+    scoreLabel: '2 – LOOK',
+    feelings: ['Stressed', 'Hungry'],
+    locations: ['Driving'],
+    attire: ['Yoga Pants'],
+    eyesWentTo: ['Butt'],
+    herBuild: ['Curvy'],
+    hairColor: 'Brown',
+    comments: 'Crosswalk pedestrian while stopped at red light. Kept eyes forward.',
+  },
+];
+
+export const INITIAL_USER: UserProfile = {
+  name: 'John Doe',
+  phone: '(555) 234-5678',
+  email: 'john.doe@example.com',
+  accountabilityEmail: 'mentor.smith@example.com',
+  isRegistered: true,
+  joinedDate: 'May 1, 2025',
+};

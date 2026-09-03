@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --navy: #030814;
+    --navy2: #030814;
+    --navy3: #030814;
+    --navy-header: #030814;
+    --royal-dark: #030814;
+    --royal-mid: #030814;
+    --royal-light: #030814;
+    --gold: #c9982c;
+    --gold2: #f1ca63;
+    --gold3: #8b681f;
+    --gold4: #6c5424;
+    --gold5: #5d491f;
+    --gold-text: #e6c866;
+    --cream: #f4e5bd;
+    --white: #f7f4e8;
+    --muted: #b9b7ad;
+    --muted2: #d5d4ca;
+    --line: #8b681f;
+  }
+
+  body {
+    background-color: #030814;
+    color: #f7f4e8;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-image:
+      linear-gradient(135deg, transparent 0 49%, rgba(205, 160, 52, 0.03) 49.2%, transparent 49.7%),
+      linear-gradient(45deg, transparent 0 80%, rgba(205, 160, 52, 0.02) 80.2%, transparent 80.7%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif, .font-serif-gold {
+    font-family: 'Cinzel', Georgia, serif;
+  }
+}
+
+/* Immersive UI Gold Card with Website Background Color */
+.gold-card {
+  background: #030814;
+  border: 1px solid #8b681f;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.9);
+}
+
+/* Immersive UI Inner Stat Box */
+.stat-card {
+  background-color: #030814;
+  border: 1px solid #6c5424;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Custom Gold Button Styles */
+.btn-gold {
+  background: linear-gradient(180deg, #f1ca63, #c9982c);
+  color: #090d10;
+  border: 1px solid #f1ca63;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 4px 15px rgba(213, 165, 52, 0.35);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition: all 0.2s ease;
+}
+.btn-gold:hover {
+  background: linear-gradient(180deg, #fae08f, #d5a534);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.6), 0 6px 22px rgba(241, 202, 99, 0.5);
+  transform: translateY(-1px);
+}
+.btn-gold:active {
+  transform: translateY(1px);
+}
+
+.btn-dark {
+  background: #030814;
+  color: #f7f4e8;
+  border: 1px solid #8b681f;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition: all 0.2s ease;
+}
+.btn-dark:hover {
+  background: #091322;
+  border-color: #f1ca63;
+  color: #ffffff;
+}
+
+.btn-cream {
+  background: #f4e5bd;
+  color: #030814;
+  border: 1px solid #fff0c7;
+  font-weight: 800;
+}
+
+/* Gold Input with Website Background Color */
+.gold-input {
+  background: #030814;
+  color: #f7f4e8;
+  border: 1px solid #765b24;
+  border-radius: 8px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gold-input:focus {
+  border-color: #f1ca63;
+  box-shadow: 0 0 0 2px rgba(241, 202, 99, 0.25);
+}
+.gold-input.has-left-icon {
+  padding-left: 2.85rem !important;
+}
+.gold-input.has-right-icon {
+  padding-right: 2.85rem !important;
+}
+.gold-input.has-both-icons {
+  padding-left: 2.85rem !important;
+  padding-right: 2.85rem !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #030814;
+}
+::-webkit-scrollbar-thumb {
+  background: #5d491f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9982c;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .gold-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+}
