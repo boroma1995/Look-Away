@@ -36,9 +36,7 @@ export function HomeScreen({
       {/* Top App Header */}
       <div>
         <div className="flex items-center justify-between pb-3 pt-1">
-          <div className="flex items-center gap-2">
-            <MainLogo size={52} glow={false} className="w-12 sm:w-14 h-auto object-contain" />
-          </div>
+          <div />
 
           {/* 7D Streak Pill */}
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#030814] border border-[#6b5220] shadow-sm">
@@ -54,6 +52,13 @@ export function HomeScreen({
           <div className="h-[1px] bg-gradient-to-r from-transparent via-[#8b681f] to-transparent w-full" />
           <span className="text-[#f1ca63] text-xs">✦</span>
           <div className="h-[1px] bg-gradient-to-r from-transparent via-[#8b681f] to-transparent w-full" />
+        </div>
+
+        {/* Hero Crest Section */}
+        <div className="flex flex-col items-center justify-center py-2 sm:py-3 text-center">
+          <div className="relative drop-shadow-[0_0_20px_rgba(241,202,99,0.3)]">
+            <MainLogo size={220} glow={true} className="w-52 h-52 sm:w-56 sm:h-56 object-contain" />
+          </div>
         </div>
 
         {/* Small Gold Divider */}

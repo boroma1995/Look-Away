@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MainLogo } from '../LionCrest';
 import { UserProfile } from '../../types';
 import { Mail, Lock, Eye, EyeOff, ShieldCheck, Zap, Check } from 'lucide-react';
 
@@ -50,6 +51,10 @@ export function RegisterScreen({
       {/* Top Header Matching Screen 4 */}
       <div>
         <div className="flex flex-col items-center justify-center pt-2 sm:pt-3 text-center">
+          <div className="relative drop-shadow-[0_0_20px_rgba(241,202,99,0.3)]">
+            <MainLogo size={112} glow={true} className="w-24 h-24 sm:w-28 sm:h-28 object-contain" />
+          </div>
+
           <p className="font-serif-gold text-[9.5px] sm:text-[10px] font-bold tracking-[0.16em] text-[#d6b158] uppercase mt-1 mb-1.5">
             EYES OF INTEGRITY
           </p>

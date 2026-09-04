@@ -9,7 +9,8 @@ import {
   AdminUserRecord,
 } from './types';
 import { INITIAL_ENGAGEMENTS, INITIAL_USER, SCORE_OPTIONS } from './data/constants';
-import { BottomNavBar, Header } from './components/Navigation';
+import { BottomNavBar } from './components/Navigation';
+import { MainLogo } from './components/LionCrest';
 import { AuthModal } from './components/AuthModal';
 import { SplashScreen } from './components/Screens/SplashScreen';
 import { RegisterScreen } from './components/Screens/RegisterScreen';
@@ -659,22 +660,16 @@ export default function App() {
 
       {/* Shared app surface for web, Android, and iOS */}
       <div className="relative z-10 w-full max-w-[1240px] mx-auto px-2 sm:px-4 py-1 transition-all duration-300">
-        <Header
-          user={user}
-          currentStep={currentStep}
-          viewMode="web"
-          onSetViewMode={() => undefined}
-          onNavigate={(step) => setCurrentStep(step)}
-          streakDays={7}
-          isAuthenticated={isAuthenticated}
-          onOpenAuthModal={() => {
-            setAuthModalInitialView('welcome');
-            setIsAuthModalOpen(true);
-          }}
-          onLogout={handleLogout}
-          onOpenAdmin={() => setCurrentStep('admin')}
-          showViewSwitcher={false}
-        />
+        <header className="flex items-center justify-center mb-1">
+          <button
+            type="button"
+            onClick={() => setCurrentStep('home')}
+            aria-label="Go to home"
+            className="cursor-pointer transition-transform hover:scale-[1.03]"
+          >
+            <MainLogo size={112} glow={true} className="w-28 sm:w-32 h-auto object-contain" />
+          </button>
+        </header>
 
         <main className="native-app-content relative w-full overflow-hidden">
           <img
