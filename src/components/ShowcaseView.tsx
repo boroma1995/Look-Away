@@ -391,6 +391,9 @@ export function ShowcaseView({
         <ReportSummaryScreen
           user={user}
           engagements={engagements}
+          onCreateReport={() => onOpenScreenInSimulator('create_report')}
+          startDate="2025-04-24"
+          endDate="2025-05-24"
           onBack={() => onOpenScreenInSimulator('create_report')}
           onViewEngagements={() => onOpenScreenInSimulator('engagements_list')}
         />

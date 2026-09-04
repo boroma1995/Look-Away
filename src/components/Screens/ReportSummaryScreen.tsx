@@ -1,5 +1,5 @@
 import { MainLogo } from '../LionCrest';
-import { UserProfile, EngagementRecord, TriggerEntry } from '../../types';
+import { UserProfile, EngagementRecord, ReportRecord, TriggerEntry } from '../../types';
 import {
   ArrowLeft,
   Heart,
@@ -14,7 +14,11 @@ interface ReportSummaryScreenProps {
   user: UserProfile;
   engagements: EngagementRecord[];
   onBack: () => void;
+  onCreateReport: () => void;
   onViewEngagements: () => void;
+  startDate?: string;
+  endDate?: string;
+  reports?: ReportRecord[];
   generalComments?: string;
   triggerEntries?: TriggerEntry[];
 }
@@ -68,7 +72,11 @@ export function ReportSummaryScreen({
   user,
   engagements,
   onBack,
+  onCreateReport,
   onViewEngagements,
+  startDate = '2025-04-24',
+  endDate = '2025-05-24',
+  reports = [],
   generalComments = '',
   triggerEntries = [],
 }: ReportSummaryScreenProps) {
@@ -103,7 +111,7 @@ export function ReportSummaryScreen({
         {/* Date Range Subtitle */}
         <div className="text-center pb-4">
           <p className="text-[11px] sm:text-xs text-[#8c8c88] font-medium tracking-wide m-0">
-            Apr 24 – May 24, 2025
+            {startDate} – {endDate}
           </p>
         </div>
 
@@ -180,15 +188,46 @@ export function ReportSummaryScreen({
             <div className="text-[10px] uppercase tracking-wider text-[#f1ca63] font-bold mb-1">
               Logged Triggers
             </div>
-            <p className="text-xs text-[#eee] leading-relaxed m-0">
-              {triggerEntries.map((entry) => entry.comment ? `${entry.trigger}: ${entry.comment}` : entry.trigger).join('; ')}
-            </p>
+            <div className="space-y-2">
+              {triggerEntries.map((entry) => (
+                <div key={entry.trigger} className="text-xs text-[#eee] leading-relaxed">
+                  <div className="font-bold text-[#f1ca63]">{entry.trigger}</div>
+                  {entry.comment && <div className="text-[#b9b7ad]">{entry.comment}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {reports.length > 1 && (
+          <div className="mt-4 bg-[#030814] border border-[#765b24]/60 rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-wider text-[#f1ca63] font-bold mb-2">
+              Previous Reports
+            </div>
+            <div className="space-y-2">
+              {reports.slice(1).map((report) => (
+                <div key={report.id} className="border-t border-[#765b24]/30 pt-2 first:border-t-0 first:pt-0">
+                  <div className="text-xs text-[#eee]">{report.startDate} – {report.endDate}</div>
+                  <div className="text-[11px] text-[#b9b7ad] mt-0.5">
+                    {report.triggers.length ? report.triggers.map((entry) => entry.trigger).join(', ') : 'No triggers logged'}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
 
-      {/* Bottom Button to View Engagements List */}
+      {/* Report actions */}
       <div className="pt-4 pb-2">
+        <button
+          type="button"
+          id="report-create-report-btn"
+          onClick={onCreateReport}
+          className="w-full mb-2 py-3 rounded-xl font-serif-gold text-xs sm:text-sm font-bold tracking-widest text-[#f1ca63] bg-[#030814] border border-[#765b24]/60 hover:border-[#f1ca63] cursor-pointer uppercase"
+        >
+          CREATE REPORT
+        </button>
         <button
           type="button"
           id="report-view-engagements-btn"

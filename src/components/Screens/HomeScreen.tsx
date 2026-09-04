@@ -1,6 +1,6 @@
 import { MainLogo } from '../LionCrest';
 import { UserProfile, EngagementRecord } from '../../types';
-import { PlusCircle, FileText, Flame, Shield, ArrowRight } from 'lucide-react';
+import { PlusCircle, FileText, Shield, ArrowRight } from 'lucide-react';
 
 interface HomeScreenProps {
   user: UserProfile;
@@ -38,13 +38,7 @@ export function HomeScreen({
         <div className="flex items-center justify-between pb-3 pt-1">
           <div />
 
-          {/* 7D Streak Pill */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#030814] border border-[#6b5220] shadow-sm">
-            <Flame className="w-3.5 h-3.5 text-[#f1ca63]" />
-            <span className="font-serif-gold text-[10px] font-bold tracking-wider text-[#f1ca63] uppercase" title="Seven consecutive days with at least one engagement logged">
-              7 DAY STREAK
-            </span>
-          </div>
+          <div />
         </div>
 
         {/* Small Gold Divider */}

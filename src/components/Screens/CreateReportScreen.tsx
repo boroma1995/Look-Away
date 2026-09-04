@@ -30,6 +30,8 @@ const PERIOD_OPTIONS: { period: string; icon: typeof Calendar }[] = [
 
 export function CreateReportScreen({
   user,
+  endDate,
+  onUpdateDates,
   onGenerateReport,
   onBack,
 }: CreateReportScreenProps) {
@@ -39,6 +41,22 @@ export function CreateReportScreen({
   const [generalComments, setGeneralComments] = useState('');
   const [selectedTriggers, setSelectedTriggers] = useState<TriggerEntry[]>([]);
   const [showTriggers, setShowTriggers] = useState(false);
+
+  const handleSelectPeriod = (period: string) => {
+    setSelectedPeriod(period);
+    if (period !== 'CUSTOM RANGE') {
+      const days = period === 'LAST 30 DAYS' ? 30 : period === 'LAST 90 DAYS' ? 90 : 7;
+      const periodEnd = new Date(endDate || new Date().toISOString().slice(0, 10));
+      const periodStart = new Date(periodEnd);
+      periodStart.setDate(periodEnd.getDate() - days + 1);
+      onUpdateDates(periodStart.toISOString().slice(0, 10), periodEnd.toISOString().slice(0, 10));
+    }
+  };
+
+  const handleOpenTriggers = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    setShowTriggers(true);
+  };
 
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -63,7 +81,7 @@ export function CreateReportScreen({
         }
         onNext={handleSubmit}
         onBack={() => setShowTriggers(false)}
-        nextLabel="GENERATE REPORT"
+        nextLabel="CREATE REPORT"
       />
     );
   }
@@ -105,7 +123,7 @@ export function CreateReportScreen({
                 key={period}
                 type="button"
                 id={`report-period-${period.toLowerCase().replace(/\s+/g, '-')}`}
-                onClick={() => setSelectedPeriod(period)}
+                onClick={() => handleSelectPeriod(period)}
                 className={`w-full py-3.5 px-4 rounded-xl font-serif-gold text-xs sm:text-sm font-bold tracking-wider transition-all cursor-pointer flex items-center justify-between ${
                   isSelected
                     ? 'bg-[#030814] text-[#eee] border border-[#f1ca63]'
@@ -152,7 +170,7 @@ export function CreateReportScreen({
 
         <button
           type="button"
-          onClick={() => setShowTriggers(true)}
+          onClick={handleOpenTriggers}
           className="w-full mt-4 py-3 rounded-xl font-serif-gold text-xs font-bold tracking-widest text-[#f1ca63] bg-[#030814] border border-[#765b24]/60 hover:border-[#f1ca63] uppercase"
         >
           LOG TRIGGERS {selectedTriggers.length ? `(${selectedTriggers.length})` : ''}
@@ -196,10 +214,10 @@ export function CreateReportScreen({
         <button
           type="button"
           id="generate-report-btn"
-          onClick={handleSubmit}
+          onClick={handleOpenTriggers}
           className="w-full py-3.5 rounded-xl font-serif-gold text-xs sm:text-sm font-bold tracking-widest text-[#0a0e14] bg-gradient-to-r from-[#d8a838] via-[#eec765] to-[#c9982c] hover:brightness-110 active:scale-[0.99] transition-all shadow-[0_4px_20px_rgba(216,168,56,0.35)] cursor-pointer uppercase"
         >
-          GENERATE REPORT
+          CREATE REPORT
         </button>
       </div>
     </div>

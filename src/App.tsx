@@ -566,6 +566,10 @@ export default function App() {
           <ReportSummaryScreen
             user={user}
             engagements={engagements}
+            onCreateReport={() => setCurrentStep('create_report')}
+            startDate={lastReport?.startDate || startDate}
+            endDate={lastReport?.endDate || endDate}
+            reports={reports}
             generalComments={lastReport?.generalComments || ''}
             triggerEntries={lastReport?.triggers || []}
             onBack={() => setCurrentStep('create_report')}
