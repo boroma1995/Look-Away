@@ -27,6 +27,7 @@ interface HeaderProps {
   onOpenAuthModal?: () => void;
   onLogout?: () => void;
   onOpenAdmin?: () => void;
+  showViewSwitcher?: boolean;
 }
 
 export function Header({
@@ -40,7 +41,31 @@ export function Header({
   onOpenAuthModal,
   onLogout,
   onOpenAdmin,
+  showViewSwitcher = true,
 }: HeaderProps) {
+  const pageTitles: Partial<Record<FlowStep, string>> = {
+    splash: 'Welcome',
+    register: 'Log In / Sign Up',
+    home: 'Home',
+    score: 'Engagement Score',
+    feeling: 'How Were You Feeling?',
+    location: 'Where Were You?',
+    attire: 'What Was She Wearing?',
+    eyes: 'Where Did Your Eyes Go?',
+    build: 'Her Body Type',
+    hair: 'Hair Color',
+    comments: 'Comments',
+    triggers: 'Triggers',
+    review: 'Review Engagement',
+    confirmation: 'Engagement Logged',
+    create_report: 'Create Report',
+    report_summary: 'Report Summary',
+    engagements_list: 'Engagements',
+    engagement_detail: 'Engagement Detail',
+    reports: 'Reports Dashboard',
+    settings: 'App Settings',
+    admin: 'Admin Records',
+  };
   const isLogging = [
     'score',
     'feeling',
@@ -63,7 +88,7 @@ export function Header({
   ].includes(currentStep);
 
   return (
-    <div className="mb-4 sm:mb-6">
+    <div className="mb-1 sm:mb-2">
       <header className="flex items-center justify-between gap-2 pb-2">
         {/* Brand Logo & Minimal Streak Badge */}
         <div
@@ -74,6 +99,9 @@ export function Header({
             <LionCrest size={72} glow={false} className="w-16 sm:w-20 h-auto" />
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="hidden sm:inline text-xs sm:text-sm font-serif-gold font-bold tracking-wider text-[#f1ca63] uppercase whitespace-nowrap">
+              {pageTitles[currentStep]}
+            </span>
             <span className="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider bg-[#030814] text-[#f1ca63] px-2.5 sm:px-3 py-1 rounded-full border border-[#8b681f]/70 shadow-sm whitespace-nowrap">
               <Flame className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#f1ca63]" strokeWidth={1.5} />
               {streakDays}d Streak
@@ -160,7 +188,7 @@ export function Header({
           </nav>
 
           {/* View Mode Switcher: Mobile Phone Frame / Desktop Expanded / 16 Screens Grid */}
-          <div className="flex items-center gap-0.5 sm:gap-1 bg-[#030814] p-0.5 sm:p-1 rounded-lg border border-[#8b681f]/80">
+          {showViewSwitcher && <div className="flex items-center gap-0.5 sm:gap-1 bg-[#030814] p-0.5 sm:p-1 rounded-lg border border-[#8b681f]/80">
             <button
               id="view-mobile-btn"
               title="Mobile Phone View"
@@ -200,7 +228,7 @@ export function Header({
               <Grid3X3 className="w-3.5 h-3.5" strokeWidth={1.5} />
               <span className="hidden sm:inline">18 Screens (Gallery)</span>
             </button>
-          </div>
+          </div>}
 
           {onOpenAdmin && (
             <button

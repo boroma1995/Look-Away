@@ -1,4 +1,3 @@
-import { MainLogo } from '../LionCrest';
 import { UserProfile, EngagementRecord, TriggerEntry } from '../../types';
 import {
   ArrowLeft,
@@ -119,7 +118,6 @@ export function ReportSummaryScreen({
           </div>
 
           <div className="shrink-0 pl-2">
-            <MainLogo size={70} glow={true} className="w-16 h-16 object-contain" />
           </div>
         </div>
 
