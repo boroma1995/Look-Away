@@ -36,10 +36,7 @@ export function HomeScreen({
       {/* Top App Header */}
       <div>
         <div className="flex items-center justify-between pb-3 pt-1">
-          {/* Small Crest & Title */}
-          <div className="flex items-center gap-2">
-            <MainLogo size={52} glow={false} className="w-12 sm:w-14 h-auto object-contain" />
-          </div>
+          <div />
 
           {/* 7D Streak Pill */}
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#030814] border border-[#6b5220] shadow-sm">
