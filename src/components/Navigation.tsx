@@ -267,14 +267,15 @@ export function BottomNavBar({
   ].includes(currentStep);
 
   return (
-    <div className={`native-bottom-nav fixed left-0 right-0 sm:left-1/2 bottom-0 sm:-translate-x-1/2 w-full sm:w-[900px] sm:max-w-[calc(100%-20px)] h-[58px] sm:h-[64px] bg-[#030814] border-t sm:border-x sm:border-t border-[#6b5220] rounded-none sm:rounded-t-xl grid ${onOpenAdmin ? 'grid-cols-5' : 'grid-cols-4'} z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.95)]`}>
+    <div className={`native-bottom-nav fixed left-0 right-0 sm:left-1/2 bottom-0 sm:-translate-x-1/2 w-full sm:w-[900px] sm:max-w-[calc(100%-20px)] h-[58px] sm:h-[64px] bg-[#050b18]/95 backdrop-blur-xl border-t sm:border-x sm:border-t border-[#8b681f]/80 rounded-none sm:rounded-t-2xl grid ${onOpenAdmin ? 'grid-cols-5' : 'grid-cols-4'} z-50 shadow-[0_-12px_35px_rgba(0,0,0,0.8)] overflow-hidden`}>
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#f1ca63] to-transparent opacity-80" />
       <button
         id="bottom-nav-home"
         onClick={() => onNavigate('home')}
-        className={`bg-transparent py-1.5 sm:py-2 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 border-r border-[#4f401e] transition-colors cursor-pointer relative ${
+        className={`bg-transparent m-1 py-1 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 border-r border-[#4f401e] transition-all cursor-pointer relative rounded-lg ${
           currentStep === 'home'
-            ? 'text-[#f1ca63] bg-[#c9982c]/15'
-            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#030814]'
+            ? 'text-[#f1ca63] bg-[#c9982c]/20 shadow-[inset_0_0_14px_rgba(241,202,99,0.08)]'
+            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#0b1525]'
         }`}
       >
         {currentStep === 'home' && (
@@ -287,10 +288,10 @@ export function BottomNavBar({
       <button
         id="bottom-nav-log"
         onClick={() => onNavigate('score')}
-        className={`bg-transparent py-1.5 sm:py-2 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 border-r border-[#4f401e] transition-colors cursor-pointer relative ${
+        className={`bg-transparent m-1 py-1 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 border-r border-[#4f401e] transition-all cursor-pointer relative rounded-lg ${
           isLogging
-            ? 'text-[#f1ca63] bg-[#c9982c]/15'
-            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#030814]'
+            ? 'text-[#f1ca63] bg-[#c9982c]/20 shadow-[inset_0_0_14px_rgba(241,202,99,0.08)]'
+            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#0b1525]'
         }`}
       >
         {isLogging && (
@@ -303,10 +304,10 @@ export function BottomNavBar({
       <button
         id="bottom-nav-reports"
         onClick={() => onNavigate('report_summary')}
-        className={`bg-transparent py-1.5 sm:py-2 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 border-r border-[#4f401e] transition-colors cursor-pointer relative ${
+        className={`bg-transparent m-1 py-1 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 border-r border-[#4f401e] transition-all cursor-pointer relative rounded-lg ${
           isReporting
-            ? 'text-[#f1ca63] bg-[#c9982c]/15'
-            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#030814]'
+            ? 'text-[#f1ca63] bg-[#c9982c]/20 shadow-[inset_0_0_14px_rgba(241,202,99,0.08)]'
+            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#0b1525]'
         }`}
       >
         {isReporting && (
@@ -319,10 +320,10 @@ export function BottomNavBar({
       <button
         id="bottom-nav-settings"
         onClick={() => onNavigate('settings')}
-        className={`bg-transparent py-1.5 sm:py-2 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-colors cursor-pointer relative ${
+        className={`bg-transparent m-1 py-1 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-all cursor-pointer relative rounded-lg ${
           currentStep === 'settings'
-            ? 'text-[#f1ca63] bg-[#c9982c]/15'
-            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#030814]'
+            ? 'text-[#f1ca63] bg-[#c9982c]/20 shadow-[inset_0_0_14px_rgba(241,202,99,0.08)]'
+            : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#0b1525]'
         }`}
       >
         {currentStep === 'settings' && (
@@ -336,7 +337,7 @@ export function BottomNavBar({
         <button
           id="bottom-nav-admin"
           onClick={onOpenAdmin}
-          className={`bg-transparent py-1.5 sm:py-2 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-colors cursor-pointer relative ${currentStep === 'admin' ? 'text-[#f1ca63] bg-[#c9982c]/15' : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#030814]'}`}
+          className={`bg-transparent m-1 py-1 px-1 text-[9px] sm:text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-all cursor-pointer relative rounded-lg ${currentStep === 'admin' ? 'text-[#f1ca63] bg-[#c9982c]/20 shadow-[inset_0_0_14px_rgba(241,202,99,0.08)]' : 'text-[#b9b7ad] hover:text-[#f1ca63] hover:bg-[#0b1525]'}`}
         >
           {currentStep === 'admin' && <span className="absolute top-0 inset-x-2 h-[2px] bg-[#f1ca63] shadow-[0_0_8px_#f1ca63]" />}
           <ShieldCheck className="w-4 h-4" strokeWidth={1.5} />

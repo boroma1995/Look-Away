@@ -54,11 +54,9 @@ export function HomeScreen({
           <div className="h-[1px] bg-gradient-to-r from-transparent via-[#8b681f] to-transparent w-full" />
         </div>
 
-        {/* Hero Crest Section */}
-        <div className="flex flex-col items-center justify-center py-2 sm:py-3 text-center">
-          <div className="relative drop-shadow-[0_0_20px_rgba(241,202,99,0.3)]">
-            <MainLogo size={220} glow={true} className="w-52 h-52 sm:w-56 sm:h-56 object-contain" />
-          </div>
+        {/* Main Home Logo */}
+        <div className="flex items-center justify-center py-2 sm:py-3">
+          <MainLogo size={220} glow={true} className="w-52 h-52 sm:w-56 sm:h-56 object-contain" />
         </div>
 
         {/* Small Gold Divider */}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { UserProfile, EngagementRecord } from '../../types';
-import { LionCrest } from '../LionCrest';
 import { GoldDivider } from '../GoldDivider';
 import {
   User,
@@ -100,7 +99,6 @@ export function SettingsScreen({
 
       {/* Header */}
       <div className="flex items-center gap-3 pb-2 mb-2">
-        <LionCrest size={96} glow={false} className="w-24 h-auto" />
         <div>
           <h2 className="font-serif-gold text-xl sm:text-2xl font-bold tracking-[0.2em] text-[#f1ca63] uppercase m-0 leading-tight">
             APP SETTINGS
