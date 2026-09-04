@@ -71,7 +71,7 @@ export function Header({
           onClick={() => onNavigate('home')}
         >
           <div className="flex items-center justify-center transition-transform group-hover:scale-105">
-            <LionCrest size={40} glow={false} className="sm:w-[46px] sm:h-[46px]" />
+            <LionCrest size={72} glow={false} className="w-16 sm:w-20 h-auto" />
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2">
             <span className="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider bg-[#030814] text-[#f1ca63] px-2.5 sm:px-3 py-1 rounded-full border border-[#8b681f]/70 shadow-sm whitespace-nowrap">

@@ -62,7 +62,7 @@ export function EngagementDetailScreen({
     {
       label: 'Hair Color',
       icon: Palette,
-      value: engagement.hairColor || 'Brown',
+      value: engagement.hairColor || 'Brown / Auburn',
     },
     {
       label: 'Comments',

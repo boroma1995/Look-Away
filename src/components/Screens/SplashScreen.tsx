@@ -15,7 +15,7 @@ export function SplashScreen({ onGetStarted, onLogIn, onSignUp }: SplashScreenPr
       {/* Main Center Emblem & Motto */}
       <div className="flex flex-col items-center justify-center my-auto">
         <div className="relative mb-6 drop-shadow-[0_0_25px_rgba(241,202,99,0.35)]">
-          <MainLogo size={200} glow={true} className="w-44 h-44 sm:w-52 sm:h-52 object-contain" />
+          <MainLogo size={280} glow={true} className="w-60 h-60 sm:w-68 sm:h-68 object-contain" />
         </div>
 
         <p className="font-serif-gold text-xs sm:text-sm font-semibold tracking-[0.25em] text-[#d6b158] uppercase select-none mt-4">

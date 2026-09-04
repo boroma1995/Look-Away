@@ -173,7 +173,7 @@ export function AuthModal({
               {/* App Logo */}
               <div className="flex justify-center mb-4">
                 <div className="relative drop-shadow-[0_0_25px_rgba(241,202,99,0.35)]">
-                  <MainLogo size={140} glow={true} className="w-32 h-32 sm:w-36 sm:h-36 object-contain" />
+                  <MainLogo size={180} glow={true} className="w-40 h-40 sm:w-44 sm:h-44 object-contain" />
                 </div>
               </div>
 
@@ -268,7 +268,7 @@ export function AuthModal({
 
               {/* Mini App Logo */}
               <div className="flex items-center justify-center gap-2 mb-4">
-                <MainLogo size={36} glow={false} className="w-9 h-9 object-contain" />
+                <MainLogo size={84} glow={true} className="w-20 h-20 object-contain" />
               </div>
 
               {loginError && (
@@ -387,7 +387,7 @@ export function AuthModal({
 
               {/* Mini App Logo */}
               <div className="flex items-center justify-center gap-2 mb-4">
-                <MainLogo size={36} glow={false} className="w-9 h-9 object-contain" />
+                <MainLogo size={84} glow={true} className="w-20 h-20 object-contain" />
               </div>
 
               {signUpError && (

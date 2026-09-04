@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Capacitor } from '@capacitor/core';
 import {
   UserProfile,
   EngagementRecord,
@@ -11,7 +10,7 @@ import {
 } from './types';
 import { INITIAL_ENGAGEMENTS, INITIAL_USER, SCORE_OPTIONS } from './data/constants';
 import { BottomNavBar } from './components/Navigation';
-import { PhoneSimulator } from './components/PhoneSimulator';
+import { MainLogo } from './components/LionCrest';
 import { AuthModal } from './components/AuthModal';
 import { SplashScreen } from './components/Screens/SplashScreen';
 import { RegisterScreen } from './components/Screens/RegisterScreen';
@@ -300,7 +299,7 @@ export default function App() {
     const finalHair =
       draft.hairColor === 'OTHER' && draft.hairColorOther.trim()
         ? draft.hairColorOther.trim()
-        : draft.hairColor || 'Brown';
+        : draft.hairColor || 'Brown / Auburn';
 
     const newRecord: EngagementRecord = {
       id: `eng-${Date.now()}`,
@@ -549,6 +548,7 @@ export default function App() {
                 startDate,
                 endDate,
                 emailToSend,
+                phoneToSend,
                 generalComments: generalComments.trim(),
                 triggers: reportTriggers.length
                   ? reportTriggers
@@ -658,18 +658,32 @@ export default function App() {
         onSignUp={handleSignUp}
       />
 
-      {/* Mobile app container */}
-      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-2.5 sm:px-6 py-2.5 sm:py-5 transition-all duration-300">
-        {Capacitor.isNativePlatform() ? (
-          <main className="native-app-content w-full min-h-screen">{renderScreen()}</main>
-        ) : (
-          <PhoneSimulator currentStep={currentStep} onSetStep={setCurrentStep}>
-            {renderScreen()}
-          </PhoneSimulator>
-        )}
+      {/* Shared app surface for web, Android, and iOS */}
+      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-2 sm:px-4 py-1 transition-all duration-300">
+        <header className="flex items-center justify-center mb-1">
+          <button
+            type="button"
+            onClick={() => setCurrentStep('home')}
+            aria-label="Go to home"
+            className="cursor-pointer transition-transform hover:scale-[1.03]"
+          >
+            <MainLogo size={112} glow={true} className="w-28 sm:w-32 h-auto object-contain" />
+          </button>
+        </header>
+
+        <main className="native-app-content relative w-full overflow-hidden">
+          <img
+            src="/Logo+lookaway.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 m-auto w-[min(75vw,560px)] max-h-[75vh] object-contain pointer-events-none"
+            style={{ opacity: 0.05 }}
+          />
+          <div className="relative z-10">{renderScreen()}</div>
+        </main>
 
         {/* Footer Note */}
-        <div className="text-center text-[#777e80] text-xs font-semibold my-6 sm:my-8 select-none">
+        <div className="text-center text-[#777e80] text-xs font-semibold mt-1 mb-2 select-none">
           Look Away demo • Data is stored in this browser using localStorage.
         </div>
       </div>

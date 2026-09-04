@@ -1,8 +1,4 @@
-import {
-  Check,
-  ChevronLeft,
-  ArrowRight,
-} from 'lucide-react';
+import { Check, ChevronLeft, ArrowRight } from 'lucide-react';
 
 interface AttireScreenProps {
   selectedAttire: string[];

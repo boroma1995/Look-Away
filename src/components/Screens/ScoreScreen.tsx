@@ -18,7 +18,7 @@ const SCORE_LEVELS: {
   {
     level: 1,
     title: '1 - SEE',
-    description: 'Saw her, then looked away immediately',
+    description: 'Saw her and then looked away immediately',
     icon: Eye,
   },
   {
@@ -29,8 +29,8 @@ const SCORE_LEVELS: {
   },
   {
     level: 3,
-    title: '3 - LOOK LONG',
-    description: 'Prolonged fixation or lingering gaze (> 2-3 seconds)',
+    title: '3 - PROLONGED LOOK',
+    description: 'Prolonged look or lingering gaze (> 2-3 seconds)',
     icon: Clock,
   },
   {

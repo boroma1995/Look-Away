@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlowStep } from '../types';
-import { ChevronLeft, ChevronRight, Wifi, BatteryMedium, Signal } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PhoneSimulatorProps {
   currentStep: FlowStep;
@@ -90,16 +90,6 @@ export function PhoneSimulator({ currentStep, onSetStep, children }: PhoneSimula
       <div className="relative w-full max-w-[440px] sm:w-[390px] sm:h-[810px] min-h-[620px] bg-[#030814] rounded-2xl sm:rounded-[52px] p-2 sm:p-3 sm:shadow-[0_0_0_2px_#765b24,0_0_0_5px_#030814,0_25px_60px_rgba(0,0,0,0.95)] border border-[#765b24]/50 sm:border-[#f1ca63]/30 flex flex-col justify-between select-none">
         {/* Inner Screen Container */}
         <div className="relative w-full h-full bg-[#030814] rounded-xl sm:rounded-[42px] overflow-hidden flex flex-col justify-between border border-[#765b24]/40 shadow-inner">
-          {/* Mobile Status Bar (9:41, signal, wifi, battery) matching reference screenshot */}
-          <div className="relative z-20 flex items-center justify-between px-6 pt-3 pb-1 text-[#eee] text-xs font-semibold select-none shrink-0">
-            <span className="tracking-tight text-[11px]">9:41</span>
-            <div className="flex items-center gap-1.5 opacity-80">
-              <Signal className="w-3 h-3 text-[#eee]" strokeWidth={2.5} />
-              <Wifi className="w-3 h-3 text-[#eee]" strokeWidth={2.5} />
-              <BatteryMedium className="w-4 h-4 text-[#eee]" strokeWidth={2.5} />
-            </div>
-          </div>
-
           {/* Phone Screen Watermark with 5% Opacity */}
           <div
             className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden select-none"
@@ -118,10 +108,6 @@ export function PhoneSimulator({ currentStep, onSetStep, children }: PhoneSimula
             {children}
           </div>
 
-          {/* Bottom Home Indicator */}
-          <div className="pb-2 pt-1 flex justify-center shrink-0 z-30">
-            <div className="w-24 sm:w-32 h-1 bg-[#f1ca63]/40 rounded-full hover:bg-[#f1ca63] transition-colors cursor-pointer" />
-          </div>
         </div>
       </div>
     </div>

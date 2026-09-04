@@ -56,7 +56,7 @@ export function ReviewScreen({ draft, onEdit, onSubmit }: ReviewScreenProps) {
   const hairText =
     draft.hairColor === 'OTHER' && draft.hairColorOther.trim()
       ? `Other (${draft.hairColorOther.trim()})`
-      : draft.hairColor || 'Brown';
+      : draft.hairColor || 'Brown / Auburn';
 
   const commentsText =
     draft.comments.trim() || 'Visual engagement logged.';

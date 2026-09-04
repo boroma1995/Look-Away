@@ -58,7 +58,7 @@ const SUMMARY_TABLE_DATA = [
   {
     category: 'Hair Color',
     icon: Palette,
-    mostCommon: 'Brown',
+    mostCommon: 'Brown / Auburn',
     highestScore: 'Blonde',
     weeklyCount: 'Black',
   },

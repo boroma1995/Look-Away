@@ -39,13 +39,21 @@
   }
 
   .native-app-content {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
   }
 
   .native-bottom-nav {
     padding-bottom: env(safe-area-inset-bottom);
     height: calc(58px + env(safe-area-inset-bottom));
+  }
+
+  .native-app-content > div {
+    min-height: 0 !important;
+  }
+
+  .native-app-content [class*='min-h-'] {
+    min-height: 0 !important;
   }
 
   h1, h2, h3, h4, .font-serif, .font-serif-gold {

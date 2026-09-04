@@ -36,7 +36,9 @@ export function SettingsScreen({
   const [name, setName] = useState(user.name);
   const [phone, setPhone] = useState(user.phone);
   const [email, setEmail] = useState(user.email);
-  const [accountabilityEmail, setAccountabilityEmail] = useState(user.accountabilityEmail);
+  const [accountabilityEmail, setAccountabilityEmail] = useState(
+    user.accountabilityEmail || 'mentor@example.com'
+  );
   const [savedToast, setSavedToast] = useState(false);
 
   const handleSave = (e: React.FormEvent) => {
@@ -98,7 +100,7 @@ export function SettingsScreen({
 
       {/* Header */}
       <div className="flex items-center gap-3 pb-2 mb-2">
-        <LionCrest size={56} glow={false} />
+        <LionCrest size={96} glow={false} className="w-24 h-auto" />
         <div>
           <h2 className="font-serif-gold text-xl sm:text-2xl font-bold tracking-[0.2em] text-[#f1ca63] uppercase m-0 leading-tight">
             APP SETTINGS
@@ -184,7 +186,7 @@ export function SettingsScreen({
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center justify-between pt-2 gap-4 flex-wrap">
           <button
             type="submit"
             className="btn-gold py-2 px-5 rounded text-xs font-bold uppercase tracking-wider cursor-pointer shadow-md"
@@ -193,7 +195,7 @@ export function SettingsScreen({
           </button>
           <div className="flex items-center gap-1.5 text-xs text-[#b9b7ad]">
             <UserCheck className="w-3.5 h-3.5 text-[#f1ca63]" />
-            <span>Active: <strong className="text-[#f1ca63]">{user.name}</strong></span>
+            <span className="text-right">Active account: <strong className="text-[#f1ca63] block sm:inline">{name || 'John Doe'}</strong></span>
           </div>
         </div>
       </form>
@@ -206,7 +208,7 @@ export function SettingsScreen({
         </h3>
 
         <div className="text-xs text-[#b9b7ad] leading-relaxed">
-          A JSON backup is a portable copy of your profile and engagement history. Export it to keep a backup, then import it on another device or after reinstalling. Sample data is reference data for exploring the app.
+          A JSON backup is a portable text file containing your profile and engagement history. Export it to keep a backup, then import it on another device or after reinstalling. Sample data is fictional reference data for exploring the app; it can be reset or cleared at any time.
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">

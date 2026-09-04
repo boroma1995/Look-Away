@@ -46,6 +46,7 @@ export interface ReportRecord {
   startDate: string;
   endDate: string;
   emailToSend: string;
+  phoneToSend: string;
   generalComments: string;
   triggers: TriggerEntry[];
 }

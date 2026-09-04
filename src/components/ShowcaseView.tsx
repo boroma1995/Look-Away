@@ -20,9 +20,6 @@ import { EngagementDetailScreen } from './Screens/EngagementDetailScreen';
 import { SettingsScreen } from './Screens/SettingsScreen';
 import {
   Maximize2,
-  Signal,
-  Wifi,
-  BatteryMedium,
   Smartphone,
   Grid3X3,
   ChevronLeft,
@@ -83,16 +80,6 @@ const MiniPhoneFrame: React.FC<MiniPhoneFrameProps> = ({
 
       {/* Mini Smartphone Frame */}
       <div className="relative w-full h-[570px] bg-[#030814] rounded-[38px] p-2.5 shadow-[0_0_0_1.5px_#765b24,0_15px_35px_rgba(0,0,0,0.95)] border border-[#f1ca63]/30 flex flex-col justify-between hover:border-[#f1ca63] hover:shadow-[0_0_25px_rgba(241,202,99,0.3)] transition-all overflow-hidden select-none">
-        {/* Status Bar */}
-        <div className="relative z-20 flex items-center justify-between px-5 pt-1.5 pb-0.5 text-[#eee] text-[10px] font-semibold select-none shrink-0 opacity-80">
-          <span>9:41</span>
-          <div className="flex items-center gap-1">
-            <Signal className="w-2.5 h-2.5 text-[#eee]" strokeWidth={2.5} />
-            <Wifi className="w-2.5 h-2.5 text-[#eee]" strokeWidth={2.5} />
-            <BatteryMedium className="w-3.5 h-3.5 text-[#eee]" strokeWidth={2.5} />
-          </div>
-        </div>
-
         {/* Lion Crest Watermark with 5% Opacity */}
         <div
           className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center select-none"
@@ -132,10 +119,6 @@ const MiniPhoneFrame: React.FC<MiniPhoneFrameProps> = ({
           </button>
         </div>
 
-        {/* Home Bar */}
-        <div className="pb-1 flex justify-center shrink-0 z-20">
-          <div className="w-20 h-1 bg-[#f1ca63]/30 rounded-full" />
-        </div>
       </div>
     </div>
   );
@@ -164,7 +147,7 @@ export function ShowcaseView({
     eyesOther: '',
     herBuild: ['CURVY', 'LONG LEGS'],
     herBuildOther: '',
-    hairColor: 'BROWN',
+    hairColor: 'BROWN / AUBURN',
     hairColorOther: '',
     comments: 'She was at the gas station and walking to her car.',
     triggers: [],
@@ -182,7 +165,7 @@ export function ShowcaseView({
     attire: ['Yoga Pants', 'Tight Jeans'],
     eyesWentTo: ['Butt', 'Legs'],
     herBuild: ['Curvy', 'Long Legs'],
-    hairColor: 'Brown',
+    hairColor: 'Brown / Auburn',
     comments: 'Visual engagement logged.',
     triggers: [],
   };
@@ -480,7 +463,7 @@ export function ShowcaseView({
         </h2>
 
         <p className="text-xs text-[#b9b7ad] tracking-wide mt-1.5 leading-relaxed">
-          High-resolution iPhone versions of every step in the Look Away accountability flow.
+          High-resolution iPhone versions of every step in the accountability flow. 
           Click any screen to inspect at full size, or open it in the interactive simulator.
         </p>
 
@@ -618,16 +601,6 @@ export function ShowcaseView({
 
             {/* 1:1 Full-Resolution Mobile Phone Frame */}
             <div className="relative w-full max-w-[390px] h-[780px] max-h-[85vh] bg-[#030814] rounded-[48px] p-3 shadow-[0_0_0_2px_#765b24,0_25px_60px_rgba(0,0,0,0.95)] border border-[#f1ca63]/40 flex flex-col justify-between overflow-hidden select-none">
-              {/* Status Bar */}
-              <div className="relative z-20 flex items-center justify-between px-6 pt-2 pb-1 text-[#eee] text-xs font-semibold select-none shrink-0">
-                <span className="tracking-tight text-[11px]">9:41</span>
-                <div className="flex items-center gap-1.5 opacity-80">
-                  <Signal className="w-3 h-3 text-[#eee]" strokeWidth={2.5} />
-                  <Wifi className="w-3 h-3 text-[#eee]" strokeWidth={2.5} />
-                  <BatteryMedium className="w-4 h-4 text-[#eee]" strokeWidth={2.5} />
-                </div>
-              </div>
-
               {/* Watermark with 5% Opacity */}
               <div
                 className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center select-none"
@@ -646,10 +619,6 @@ export function ShowcaseView({
                 {ALL_SCREENS[inspectIndex].render()}
               </div>
 
-              {/* Bottom Home Indicator */}
-              <div className="pb-2 pt-1 flex justify-center shrink-0 z-30">
-                <div className="w-28 h-1 bg-[#f1ca63]/40 rounded-full" />
-              </div>
             </div>
 
             {/* Bottom Step Switcher (< Previous | Next >) */}

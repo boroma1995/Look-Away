@@ -38,14 +38,14 @@ export function HomeScreen({
         <div className="flex items-center justify-between pb-3 pt-1">
           {/* Small Crest & Title */}
           <div className="flex items-center gap-2">
-            <MainLogo size={28} glow={false} className="w-7 h-7 object-contain" />
+            <MainLogo size={52} glow={false} className="w-12 sm:w-14 h-auto object-contain" />
           </div>
 
           {/* 7D Streak Pill */}
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#030814] border border-[#6b5220] shadow-sm">
             <Flame className="w-3.5 h-3.5 text-[#f1ca63]" />
-            <span className="font-serif-gold text-[10px] font-bold tracking-wider text-[#f1ca63] uppercase">
-              7D STREAK
+            <span className="font-serif-gold text-[10px] font-bold tracking-wider text-[#f1ca63] uppercase" title="Seven consecutive days with at least one engagement logged">
+              7 DAY STREAK
             </span>
           </div>
         </div>
@@ -60,7 +60,7 @@ export function HomeScreen({
         {/* Hero Crest Section */}
         <div className="flex flex-col items-center justify-center py-2 sm:py-3 text-center">
           <div className="relative drop-shadow-[0_0_20px_rgba(241,202,99,0.3)]">
-            <MainLogo size={135} glow={true} className="w-28 h-28 sm:w-32 sm:h-32 object-contain" />
+            <MainLogo size={220} glow={true} className="w-52 h-52 sm:w-56 sm:h-56 object-contain" />
           </div>
         </div>
 
@@ -97,7 +97,7 @@ export function HomeScreen({
             </span>
             <div className="flex items-center justify-center gap-1 mt-1 text-emerald-400 font-bold text-xs">
               <Shield className="w-3.5 h-3.5" />
-              <span title="Tracking is active">ACTIVE</span>
+              <span title="Your engagement tracking is active">ACTIVE</span>
             </div>
           </div>
         </div>
