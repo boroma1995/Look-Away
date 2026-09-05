@@ -70,7 +70,7 @@ export function Header({
           onClick={() => onNavigate('home')}
         >
           <div className="flex items-center justify-center transition-transform group-hover:scale-105">
-            <LionCrest size={72} glow={false} className="w-16 sm:w-20 h-auto" />
+            <LionCrest size={72} glow={false} src="/header logo.png" className="w-16 sm:w-20 h-auto" />
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2">
             {/* User Account Chip */}

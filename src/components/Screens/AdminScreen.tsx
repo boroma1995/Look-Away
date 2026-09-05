@@ -9,8 +9,8 @@ interface AdminScreenProps {
   onLogout: () => void;
 }
 
-const ADMIN_ID = 'admin';
-const ADMIN_PASSWORD = 'admin123';
+const MENTOR_ID = 'mentor';
+const MENTOR_PASSWORD = 'mentor123';
 
 export function AdminScreen({ users, engagements, reports, onLogout }: AdminScreenProps) {
   const [adminId, setAdminId] = useState('');
@@ -40,34 +40,76 @@ export function AdminScreen({ users, engagements, reports, onLogout }: AdminScre
       <section className="max-w-[460px] mx-auto gold-card p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-3 rounded-xl bg-[#c9982c]/15 border border-[#8b681f]"><ShieldCheck className="w-6 h-6 text-[#f1ca63]" /></div>
-          <div><p className="text-[10px] tracking-[0.2em] text-[#c9982c] font-bold">RESTRICTED AREA</p><h1 className="text-xl text-[#f1ca63]">Admin sign in</h1></div>
+          <div><p className="text-[10px] tracking-[0.2em] text-[#c9982c] font-bold">MENTOR AREA</p><h1 className="text-xl text-[#f1ca63]">Mentor sign in</h1></div>
         </div>
-        <form className="space-y-4" onSubmit={(event) => { event.preventDefault(); if (adminId.trim() === ADMIN_ID && password === ADMIN_PASSWORD) { setIsLoggedIn(true); setError(''); } else setError('Invalid admin ID or password.'); }}>
-          <label className="block text-xs font-bold tracking-wider text-[#f0d68a]">ADMIN ID<input className="gold-input w-full mt-1.5" value={adminId} onChange={(event) => setAdminId(event.target.value)} autoComplete="username" /></label>
+        <form className="space-y-4" onSubmit={(event) => { event.preventDefault(); if (adminId.trim().toLowerCase() === MENTOR_ID && password === MENTOR_PASSWORD) { setIsLoggedIn(true); setError(''); } else setError('Invalid mentor ID or password.'); }}>
+          <label className="block text-xs font-bold tracking-wider text-[#f0d68a]">MENTOR ID<input className="gold-input w-full mt-1.5" value={adminId} onChange={(event) => setAdminId(event.target.value)} autoComplete="username" /></label>
           <label className="block text-xs font-bold tracking-wider text-[#f0d68a]">PASSWORD<input type="password" className="gold-input w-full mt-1.5" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" /></label>
           {error && <p className="text-xs text-red-300">{error}</p>}
-          <button className="btn-gold w-full rounded-lg py-3 text-xs" type="submit"><LockKeyhole className="inline w-4 h-4 mr-2" />ACCESS ADMIN</button>
+          <button className="btn-gold w-full rounded-lg py-3 text-xs" type="submit"><LockKeyhole className="inline w-4 h-4 mr-2" />ACCESS MENTOR DASHBOARD</button>
         </form>
-        <p className="mt-5 text-[11px] leading-relaxed text-[#9d9b92]">Demo credentials: <strong className="text-[#f1ca63]">admin</strong> / <strong className="text-[#f1ca63]">admin123</strong>. This browser-only demo is not a production security boundary.</p>
+        <p className="mt-5 text-[11px] leading-relaxed text-[#9d9b92]">Demo credentials: <strong className="text-[#f1ca63]">mentor</strong> / <strong className="text-[#f1ca63]">mentor123</strong>. This browser-only demo is not a production security boundary.</p>
       </section>
     );
   }
 
   const allEngagements = users.flatMap((user) => user.engagements);
-  const allReports = users.flatMap((user) => user.reports);
+  const reportEntries = users.flatMap((user) =>
+    user.reports.map((report) => ({ report, user }))
+  );
+  const knownReportIds = new Set(reportEntries.map(({ report }) => report.id));
+  const legacyReportEntries = reports
+    .filter((report) => !knownReportIds.has(report.id))
+    .map((report) => ({ report, user: null }));
+  const allReports = [...reportEntries, ...legacyReportEntries];
   const visibleEngagements = allEngagements.length ? allEngagements : engagements;
-  const visibleReports = allReports.length ? allReports : reports;
+  const visibleReports = allReports;
 
   return (
     <section className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div><p className="text-[10px] tracking-[0.2em] text-[#c9982c] font-bold">CONTROL CENTER</p><h1 className="text-2xl text-[#f1ca63]">Admin records</h1><p className="text-xs text-[#b9b7ad] mt-1">Users, engagement logs, and generated reports stored on this device.</p></div>
+        <div><p className="text-[10px] tracking-[0.2em] text-[#c9982c] font-bold">MENTOR DASHBOARD</p><h1 className="text-2xl text-[#f1ca63]">Member records</h1><p className="text-xs text-[#b9b7ad] mt-1">Users, engagement logs, and generated reports stored on this device.</p></div>
         <div className="flex gap-2"><button className="btn-gold rounded-lg px-3 py-2 text-[11px]" onClick={exportRecords}><Download className="inline w-4 h-4 mr-1" />EXPORT JSON</button><button className="btn-dark rounded-lg px-3 py-2 text-[11px]" onClick={() => { setIsLoggedIn(false); onLogout(); }}><LogOut className="inline w-4 h-4 mr-1" />SIGN OUT</button></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3"><div className="stat-card"><Users className="w-4 h-4 text-[#f1ca63]" /><p className="text-2xl font-bold mt-2">{users.length}</p><p className="text-[10px] text-[#b9b7ad]">USERS</p></div><div className="stat-card"><Eye className="w-4 h-4 text-[#f1ca63]" /><p className="text-2xl font-bold mt-2">{visibleEngagements.length}</p><p className="text-[10px] text-[#b9b7ad]">ENGAGEMENT LOGS</p></div><div className="stat-card"><ShieldCheck className="w-4 h-4 text-[#f1ca63]" /><p className="text-2xl font-bold mt-2">{visibleReports.length}</p><p className="text-[10px] text-[#b9b7ad]">REPORTS</p></div></div>
       <div className="gold-card overflow-hidden"><div className="px-4 py-3 border-b border-[#765b24] text-xs font-bold tracking-widest text-[#f1ca63]">USER DIRECTORY</div>{users.map((user) => <button key={user.email} className="w-full text-left px-4 py-3 border-b border-[#765b24]/40 hover:bg-[#091322]" onClick={() => setSelectedUser(user)}><span className="font-bold text-sm">{user.name}</span><span className="block text-xs text-[#b9b7ad]">{user.email} • {user.engagements.length} logs • {user.reports.length} reports</span></button>)}{!users.length && <p className="p-4 text-sm text-[#b9b7ad]">No registered users recorded yet.</p>}</div>
       {selectedUser && <div className="gold-card p-4"><div className="flex justify-between gap-3"><div><h2 className="text-lg text-[#f1ca63]">{selectedUser.name}</h2><p className="text-xs text-[#b9b7ad]">{selectedUser.email} • joined {selectedUser.joinedDate}</p></div><button className="text-xs text-[#f1ca63]" onClick={() => setSelectedUser(null)}>CLOSE</button></div><div className="mt-4 space-y-2">{selectedUser.engagements.map((item) => <div className="p-3 border border-[#765b24]/60 rounded-lg text-xs" key={item.id}><strong>{item.dateStr} • {item.scoreLabel}</strong><p className="text-[#b9b7ad] mt-1">{item.comments}</p></div>)}{!selectedUser.engagements.length && <p className="text-xs text-[#b9b7ad]">No engagement logs for this user.</p>}</div></div>}
-      <div className="gold-card overflow-hidden"><div className="px-4 py-3 border-b border-[#765b24] text-xs font-bold tracking-widest text-[#f1ca63]">ALL REPORTS</div>{visibleReports.map((report) => <div className="px-4 py-3 border-b border-[#765b24]/40 text-xs" key={report.id}><strong>{report.createdAt.slice(0, 10)} • {report.startDate} to {report.endDate}</strong><p className="text-[#b9b7ad] mt-1">{report.generalComments || 'No general comments recorded.'}</p><p className="text-[#c9982c] mt-1">{report.triggers.length} trigger entries • email: {report.emailToSend || 'not specified'} • phone: {report.phoneToSend || 'not specified'}</p></div>)}{!visibleReports.length && <p className="p-4 text-sm text-[#b9b7ad]">No reports recorded yet.</p>}</div>
+      <div className="gold-card overflow-hidden">
+        <div className="px-4 py-3 border-b border-[#765b24] text-xs font-bold tracking-widest text-[#f1ca63]">ALL MEMBER REPORTS</div>
+        {visibleReports.map(({ report, user }) => (
+          <article className="px-4 py-4 border-b border-[#765b24]/40 text-xs space-y-2" key={report.id}>
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <h2 className="text-sm font-bold text-[#f1ca63]">{user?.name || 'Unassigned member'}</h2>
+                <p className="text-[#b9b7ad]">{user?.email || 'Member details unavailable'}</p>
+              </div>
+              <div className="text-right text-[#b9b7ad]">
+                <p>Created {report.createdAt.slice(0, 10)}</p>
+                <p>{report.startDate} to {report.endDate}</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[#eee]">
+              <p><span className="text-[#c9982c]">Report ID:</span> {report.id}</p>
+              <p><span className="text-[#c9982c]">Joined:</span> {user?.joinedDate || 'Unavailable'}</p>
+              <p><span className="text-[#c9982c]">Email delivery:</span> {report.emailToSend || 'Not specified'}</p>
+              <p><span className="text-[#c9982c]">Phone delivery:</span> {report.phoneToSend || 'Not specified'}</p>
+            </div>
+            <div>
+              <p className="text-[#c9982c] font-bold">General comments</p>
+              <p className="text-[#eee] whitespace-pre-wrap">{report.generalComments || 'No general comments recorded.'}</p>
+            </div>
+            <div>
+              <p className="text-[#c9982c] font-bold">Triggers ({report.triggers.length})</p>
+              {report.triggers.length ? report.triggers.map((entry, index) => (
+                <div className="mt-1 text-[#eee]" key={`${report.id}-trigger-${index}`}>
+                  <span className="font-bold">{entry.trigger}</span>{entry.comment && <span className="text-[#b9b7ad]">: {entry.comment}</span>}
+                </div>
+              )) : <p className="text-[#b9b7ad]">No triggers logged.</p>}
+            </div>
+          </article>
+        ))}
+        {!visibleReports.length && <p className="p-4 text-sm text-[#b9b7ad]">No reports recorded yet.</p>}
+      </div>
     </section>
   );
 }

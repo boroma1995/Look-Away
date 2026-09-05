@@ -171,15 +171,15 @@ export function AuthModal({
           {view === 'welcome' && (
             <div className="py-2">
               {/* App Logo */}
-              <div className="flex justify-center mb-4">
-                <div className="relative drop-shadow-[0_0_25px_rgba(241,202,99,0.35)]">
-                  <MainLogo size={180} glow={true} className="w-40 h-40 sm:w-44 sm:h-44 object-contain" />
+              <div className="flex justify-center mb-5">
+                <div className="relative drop-shadow-[0_0_30px_rgba(241,202,99,0.4)]">
+                  <MainLogo size={260} glow={true} className="w-52 h-52 sm:w-60 sm:h-60 object-contain" />
                 </div>
               </div>
 
               {/* Title & Motto */}
-              <p className="font-serif-gold text-xs font-medium tracking-[0.2em] text-[#d6b158] uppercase mt-2 mb-4">
-                STAY FOCUSED. STAY FAITHFUL.
+              <p className="font-serif-gold text-sm sm:text-base font-medium tracking-[0.18em] text-[#d6b158] uppercase mt-2 mb-4">
+                MAINTAIN YOUR FOCUS
               </p>
 
               <GoldDivider compact={true} />
@@ -267,8 +267,8 @@ export function AuthModal({
               </div>
 
               {/* Mini App Logo */}
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <MainLogo size={84} glow={true} className="w-20 h-20 object-contain" />
+              <div className="flex items-center justify-center gap-2 mb-5">
+                <MainLogo size={140} glow={true} className="w-28 h-28 sm:w-32 sm:h-32 object-contain" />
               </div>
 
               {loginError && (
@@ -386,8 +386,8 @@ export function AuthModal({
               </div>
 
               {/* Mini App Logo */}
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <MainLogo size={84} glow={true} className="w-20 h-20 object-contain" />
+              <div className="flex items-center justify-center gap-2 mb-5">
+                <MainLogo size={140} glow={true} className="w-28 h-28 sm:w-32 sm:h-32 object-contain" />
               </div>
 
               {signUpError && (

@@ -4,14 +4,15 @@ interface LionCrestProps {
   size?: number | string;
   className?: string;
   glow?: boolean;
+  src?: string;
 }
 
-export function LionCrest({ size = 58, className = '', glow = false }: LionCrestProps) {
-  const [imgSrc, setImgSrc] = useState('/Logo+lookaway.png');
+export function LionCrest({ size = 58, className = '', glow = false, src = '/Logo+lookaway.png' }: LionCrestProps) {
+  const [imgSrc, setImgSrc] = useState(src);
   const [imgError, setImgError] = useState(false);
 
   const handleError = () => {
-    if (imgSrc === '/Logo+lookaway.png') {
+    if (imgSrc === src) {
       // Try fallback path in public/assets if needed
       setImgSrc('/assets/Logo_main.png');
     } else {
