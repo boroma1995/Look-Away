@@ -568,9 +568,23 @@ export default function App() {
                   report,
                   user,
                 }),
-              }).catch((error) => {
-                console.error('Report email delivery failed:', error);
-              });
+              })
+                .then(async (response) => {
+                  if (response.ok) return;
+
+                  let message = 'The report email could not be sent.';
+                  try {
+                    const body = await response.json();
+                    if (body.error) message = body.error;
+                  } catch {
+                    // Keep the fallback message when the function returns a non-JSON response.
+                  }
+                  throw new Error(message);
+                })
+                .catch((error) => {
+                  console.error('Report email delivery failed:', error);
+                  window.alert(`Report email was not sent: ${error.message}`);
+                });
               setCurrentStep('report_summary');
             }}
             onBack={() => setCurrentStep('home')}
