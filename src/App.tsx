@@ -540,21 +540,37 @@ export default function App() {
               setStartDate(s);
               setEndDate(e);
             }}
-            onGenerateReport={(emailToSend, phoneToSend, generalComments, reportTriggers) => {
+            onGenerateReport={(emailToSend, secondaryEmailToSend, phoneToSend, generalComments, reportTriggers) => {
               const report: ReportRecord = {
                 id: `report-${Date.now()}`,
                 createdAt: new Date().toISOString(),
                 startDate,
                 endDate,
-                emailToSend,
+                emailToSend: emailToSend.trim(),
+                secondaryEmailToSend: secondaryEmailToSend.trim(),
                 phoneToSend,
                 generalComments: generalComments.trim(),
                 triggers: reportTriggers.length
                   ? reportTriggers
                   : engagements.flatMap((engagement) => engagement.triggers || []),
               };
+              setUser((currentUser) => ({
+                ...currentUser,
+                accountabilityEmail: emailToSend.trim(),
+              }));
               setLastReport(report);
               setReports((previous) => [report, ...previous]);
+              void fetch('/.netlify/functions/send-report', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  recipients: [report.emailToSend, report.secondaryEmailToSend].filter(Boolean),
+                  report,
+                  user,
+                }),
+              }).catch((error) => {
+                console.error('Report email delivery failed:', error);
+              });
               setCurrentStep('report_summary');
             }}
             onBack={() => setCurrentStep('home')}

@@ -17,7 +17,7 @@ interface CreateReportScreenProps {
   startDate: string;
   endDate: string;
   onUpdateDates: (start: string, end: string) => void;
-  onGenerateReport: (emailToSend: string, phoneToSend: string, generalComments: string, triggers: TriggerEntry[]) => void;
+  onGenerateReport: (emailToSend: string, secondaryEmailToSend: string, phoneToSend: string, generalComments: string, triggers: TriggerEntry[]) => void;
   onBack: () => void;
 }
 
@@ -36,7 +36,8 @@ export function CreateReportScreen({
   onBack,
 }: CreateReportScreenProps) {
   const [selectedPeriod, setSelectedPeriod] = useState('LAST 7 DAYS');
-  const [email, setEmail] = useState(user.email || 'email@example.com');
+  const [email, setEmail] = useState(user.accountabilityEmail || user.email || 'email@example.com');
+  const [secondaryEmail, setSecondaryEmail] = useState('');
   const [phone, setPhone] = useState(user.phone || '');
   const [generalComments, setGeneralComments] = useState('');
   const [selectedTriggers, setSelectedTriggers] = useState<TriggerEntry[]>([]);
@@ -60,7 +61,7 @@ export function CreateReportScreen({
 
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
-    onGenerateReport(email, phone, generalComments, selectedTriggers);
+    onGenerateReport(email, secondaryEmail, phone, generalComments, selectedTriggers);
   };
 
   if (showTriggers) {
@@ -156,7 +157,7 @@ export function CreateReportScreen({
         {/* Email Input Section */}
         <div className="pt-6">
           <p className="text-xs sm:text-sm text-[#8c8c88] font-normal tracking-wide pb-2 text-left">
-            Send Report To Email
+            Primary Report Email
           </p>
           <input
             type="email"
@@ -166,6 +167,22 @@ export function CreateReportScreen({
             placeholder="email@example.com"
             className="w-full bg-[#030814] text-[#eee] placeholder:text-[#6e6e6a] border border-[#765b24]/60 rounded-xl py-3 px-4 text-xs sm:text-sm outline-none focus:border-[#f1ca63]"
           />
+          <p className="text-[10px] text-[#8c8c88] mt-1.5 text-left">This address stays as the default for future reports until you change it.</p>
+        </div>
+
+        <div className="pt-4">
+          <p className="text-xs sm:text-sm text-[#8c8c88] font-normal tracking-wide pb-2 text-left">
+            Secondary Report Email <span className="text-[#6e6e6a]">(optional)</span>
+          </p>
+          <input
+            type="email"
+            id="report-secondary-email-input"
+            value={secondaryEmail}
+            onChange={(e) => setSecondaryEmail(e.target.value)}
+            placeholder="another-person@example.com"
+            className="w-full bg-[#030814] text-[#eee] placeholder:text-[#6e6e6a] border border-[#765b24]/60 rounded-xl py-3 px-4 text-xs sm:text-sm outline-none focus:border-[#f1ca63]"
+          />
+          <p className="text-[10px] text-[#8c8c88] mt-1.5 text-left">This field is blank each time you create a new report.</p>
         </div>
 
         <button

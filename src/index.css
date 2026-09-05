@@ -163,16 +163,25 @@
     background: #fff !important;
     color: #111 !important;
   }
-  .no-print {
+  .no-print,
+  .mentor-header-actions,
+  .mentor-summary-stats,
+  .mentor-user-list,
+  .mentor-all-reports,
+  .mentor-close-row button:not(:last-child) {
     display: none !important;
   }
   .print-only {
     display: block !important;
   }
-  .gold-card {
+  .gold-card,
+  .mentor-selected-user {
     border: 1px solid #ccc !important;
     box-shadow: none !important;
     background: #fff !important;
     color: #111 !important;
+  }
+  .mentor-selected-user {
+    display: block !important;
   }
 }

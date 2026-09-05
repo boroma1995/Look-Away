@@ -19,6 +19,17 @@ View your app in AI Studio: https://ai.studio/apps/c127550e-b3c8-4a9f-a6e0-f9fb0
 3. Run the app:
    `npm run dev`
 
+## Report Email Delivery
+
+The primary report email is saved as the user's default and remains prefilled until changed. The optional secondary email is used only for the current report and starts blank on the next report.
+
+Automatic delivery uses the Netlify Function at `/.netlify/functions/send-report` and Resend. Configure these environment variables in Netlify:
+
+- `RESEND_API_KEY`: Resend API key
+- `REPORT_FROM_EMAIL`: A verified sender address in Resend
+
+When a report is created, it is sent to the primary address and, when provided, the secondary address.
+
 ## Android and iOS
 
 The native apps use Capacitor and share the same mobile React experience as the web app.
