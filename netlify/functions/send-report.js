@@ -1,4 +1,4 @@
-const PDFDocument = require('pdfkit');
+import PDFDocument from 'pdfkit';
 
 const json = (statusCode, body) => ({
   statusCode,
@@ -41,7 +41,7 @@ const createReportPdf = (report, user) => new Promise((resolve, reject) => {
   document.end();
 });
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' });
 
   const apiKey = process.env.RESEND_API_KEY;
